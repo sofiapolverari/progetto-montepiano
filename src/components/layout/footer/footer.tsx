@@ -1,12 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { SocialButton } from "../../social-button/social-button";
-//carosello
+import { CAROUSEL_HEIGHT } from "../../carousel/constants";
+import { Carousel, CarouselProps } from "../../carousel/carousel";
 
-interface FooterProps {
+export interface FooterProps {
   color: "pakistan-green" | "field-drab" | "chestnut" | "brunswick-green";
   linkUrl: string[];
   body: string[];
+  carouselItems: CarouselProps["items"]
 }
 
 const Root = styled.div`
@@ -59,7 +61,7 @@ const SocialWrapper = styled.div`
 `;
 
 const CarouselBox = styled.div`
-  height: 300px; //fissa?
+  height: ${CAROUSEL_HEIGHT}
 `;
 
 const TextBox = styled.div`
@@ -74,8 +76,7 @@ const TextBox = styled.div`
   }
 `;
 
-export const Footer = ({ color, linkUrl, body, ...props }: FooterProps) => {
-  return (
+export const Footer = ({ color, linkUrl, body, carouselItems, ...props }: FooterProps) => (
     <Root color={color}>
       <TopWrapper>
         <Title>montepiano</Title>
@@ -91,7 +92,7 @@ export const Footer = ({ color, linkUrl, body, ...props }: FooterProps) => {
           )}
         </SocialWrapper>
       </TopWrapper>
-      <CarouselBox />
+      <Carousel items={carouselItems} />
       <TextBox>
         {body.map((paragraph) => (
           <div>{paragraph}</div>
@@ -99,6 +100,5 @@ export const Footer = ({ color, linkUrl, body, ...props }: FooterProps) => {
       </TextBox>
     </Root>
   );
-};
 
 // TODO MANDARE A CAPO IL TESTO, CREARE CARTELLINA PER I SOCIAL, ALLINEARE LA TESTA

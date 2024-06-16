@@ -1,30 +1,31 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { CAROUSEL_HEIGHT } from "../constants";
 
 export interface CarouselItemProps {
   linkUrl: string;
   imageUrl: string;
-  isGrayscale: boolean;
+  $isCenter: boolean;
 }
 
-const Root = styled.div`
+const Root = styled.div<Pick<CarouselItemProps, "$isCenter">>`
   display: flex;
   position: relative;
   border-radius: 0% 20% 0% 20%;
-  height: 300px;
+  width: ${({$isCenter}) => !$isCenter ? "25vw": `50vw`};
+  height: ${({$isCenter}) => $isCenter ? CAROUSEL_HEIGHT: `calc(${CAROUSEL_HEIGHT}/2)`};
   overflow: hidden;
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease-out;
 `;
 
-const Photo = styled.img<Pick<CarouselItemProps, "isGrayscale">>`
+const Photo = styled.img<Pick<CarouselItemProps, "$isCenter">>`
   height: 100%;
-  object-fit: scale-down; //TODO tagliamo o anita manda la dimensione giusta?
-  transition: all 0.3s ease-out;
+  object-fit: contain; //TODO tagliamo o anita manda la dimensione giusta?
 
-  ${({ isGrayscale }) => {
-    if (isGrayscale)
+  ${({ $isCenter }) => {
+    if (!$isCenter)
       return css`
         filter: grayscale(100%);
       `;
@@ -34,13 +35,13 @@ const Photo = styled.img<Pick<CarouselItemProps, "isGrayscale">>`
 export const CarouselItem = ({
   linkUrl,
   imageUrl,
-  isGrayscale,
+  $isCenter,
   ...props
 }: CarouselItemProps) => {
   return (
     <a href={linkUrl}>
-      <Root>
-        <Photo src={imageUrl} isGrayscale={isGrayscale} />
+      <Root $isCenter={$isCenter}>
+        <Photo src={imageUrl} $isCenter={$isCenter} />
       </Root>
     </a>
   );

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Footer } from "./footer";
+import { Footer, FooterProps } from "./footer";
+import { carouselItems } from "../../carousel/carousel.fixture";
 const meta: Meta<typeof Footer> = {
   title: "Components/Footer",
   component: Footer,
@@ -27,34 +28,36 @@ const body = [
   "Ufficio Informazioni: Via Badia, 44 - 59026 Montepiano (PO) info@prolocomontepiano.com prolocomontepiano@pec.it",
 ];
 
+const standardArgs: Partial<FooterProps> = {
+  linkUrl: linkUrl,
+  body: body,
+  carouselItems: carouselItems,
+};
+
 export const Default: Story = {
   args: {
-    linkUrl: linkUrl,
-    body: body,
+    ...standardArgs,
     color: "pakistan-green",
   },
 };
 
 export const FieldDrab: Story = {
   args: {
-    linkUrl: linkUrl,
-    body: body,
+    ...standardArgs,
     color: "field-drab",
   },
 };
 
 export const Chestnut: Story = {
   args: {
-    linkUrl: linkUrl,
-    body: body,
+    ...standardArgs,
     color: "chestnut",
   },
 };
 
 export const BrunswickGreen: Story = {
   args: {
-    linkUrl: linkUrl,
-    body: body,
+    ...standardArgs,
     color: "brunswick-green",
   },
 };

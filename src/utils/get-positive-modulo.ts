@@ -1,0 +1,1 @@
+export const getPositiveModulo = (n:number, modulo:number) => (n % modulo + modulo) % modulo
