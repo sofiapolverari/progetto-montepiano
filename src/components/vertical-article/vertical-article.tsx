@@ -33,7 +33,7 @@ const Title = styled.h1<{ color: MainColorPaletteType }>`
   font-size: 60px;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 40px;
+  margin: 0px 0px 0px 40px;
   @media (min-width: 1280px) {
     font-size: 80px; //dim responsive del testo
   }

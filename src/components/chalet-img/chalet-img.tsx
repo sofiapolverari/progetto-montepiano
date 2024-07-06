@@ -45,15 +45,17 @@ const Mask = styled.div<{ color: MainColorPaletteType }>`
 
 const Photo = styled.img`
   width: 100vw;
-  height: 80vh; //Perché non funziona se è al 100?
+  height: 80vh;
   object-fit: cover;
+  transition: all 0.3s ease-out;
 `;
 
-const Root = styled.div`
+const Root = styled.a`
   display: flex;
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
+  overflow: hidden;
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease-out;
@@ -64,10 +66,9 @@ const Root = styled.div`
     }
     ${Label} {
       opacity: 1;
-
-      ${Photo} {
-        transform: scale(1.5); //non funziona
-      }
+    }
+    ${Photo} {
+      transform: scale(1.5); //non funziona
     }
   }
 `;
@@ -81,8 +82,7 @@ export const ChaletImg: FC<ChaletImgProps> = ({
   ...props
 }) => {
   return (
-    <Root>
-      {" "}
+    <Root href={linkUrl}>
       <AnimatePresence mode={"popLayout"}>
         {
           <motion.div

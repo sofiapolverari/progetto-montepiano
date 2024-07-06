@@ -24,7 +24,7 @@ export const Default: Story = {
     color: "pakistan-green",
     label: "Scopri",
     direction: "left",
-    //linkUrl: "https://www.prolocomontepiano.com/",
+    linkUrl: "https://www.prolocomontepiano.com/",
     imageUrl:
       "https://www.infobuild.it/wp-content/uploads/progettazione-case-di-campagna.jpg",
   },
@@ -35,7 +35,7 @@ export const FieldDrab: Story = {
     color: "field-drab",
     label: "Scopri",
     direction: "left",
-    //linkUrl: "https://www.prolocomontepiano.com/",
+    linkUrl: "https://www.prolocomontepiano.com/",
     imageUrl:
       "https://www.infobuild.it/wp-content/uploads/progettazione-case-di-campagna.jpg",
   },
@@ -46,7 +46,7 @@ export const Chestnut: Story = {
     color: "chestnut",
     label: "Scopri",
     direction: "left",
-    //linkUrl: "https://www.prolocomontepiano.com/",
+    linkUrl: "https://www.prolocomontepiano.com/",
     imageUrl:
       "https://www.infobuild.it/wp-content/uploads/progettazione-case-di-campagna.jpg",
   },
@@ -57,7 +57,7 @@ export const BrunswickGreen: Story = {
     color: "brunswick-green",
     label: "Scopri",
     direction: "left",
-    //linkUrl: "https://www.prolocomontepiano.com/",
+    linkUrl: "https://www.prolocomontepiano.com/",
     imageUrl:
       "https://www.infobuild.it/wp-content/uploads/progettazione-case-di-campagna.jpg",
   },

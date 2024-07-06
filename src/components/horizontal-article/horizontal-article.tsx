@@ -86,6 +86,11 @@ const Photo = styled.img`
   width: 80%;
 `;
 
+const ImageAnimatedWrapper= styled(motion.div)`
+  display: flex;
+  justify-content: center;
+`
+
 export const HorizontalArticle: FC<HorizontalArticleProps> = ({
   title,
   dateLabel,
@@ -117,13 +122,13 @@ export const HorizontalArticle: FC<HorizontalArticleProps> = ({
       </div>
       <ImageWrapper>
         <AnimatePresence mode={"popLayout"}>
-          <motion.div
+          <ImageAnimatedWrapper
             initial={{ translateX: "100%", opacity: 0 }}
             animate={{ translateX: "0%", opacity: 1 }}
             transition={{ ease: "easeOut", duration: 0.4 }}
           >
             <Photo src={imageUrl} />
-          </motion.div>
+          </ImageAnimatedWrapper>
         </AnimatePresence>
       </ImageWrapper>
       <TextBox color={color}> {body} </TextBox>
