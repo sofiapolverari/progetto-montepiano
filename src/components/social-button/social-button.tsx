@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { ReactComponent as Facebook } from "./social-icon/facebook.svg";
 import { ReactComponent as Instagram } from "./social-icon/instagram.svg";
 import { ReactComponent as Whatsapp } from "./social-icon/whatsapp.svg";
+import { FC } from "react";
 
 interface SocialButtonProps {
   linkUrl: string;
@@ -11,11 +12,11 @@ interface SocialButtonProps {
 
 const Root = styled.a``;
 
-export const SocialButton = ({
+export const SocialButton: FC<SocialButtonProps> = ({
   linkUrl,
   icon,
   ...props
-}: SocialButtonProps) => {
+}) => {
   let socialIcon = <></>;
   if (icon === "facebook") {
     socialIcon = <Facebook fill="#e9e5d9" height={30} />;

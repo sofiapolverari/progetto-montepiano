@@ -1,8 +1,13 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import {
+  MainColorPalette,
+  MainColorPaletteType,
+} from "../../../../constants/colors";
+import { FC } from "react";
 
 interface HamburgerButtonProps {
-  color: "pakistan-green" | "field-drab" | "chestnut" | "brunswick-green";
+  color: MainColorPaletteType;
   onClick?: () => void;
 }
 
@@ -25,7 +30,7 @@ const LeafHamburger = styled.div`
   cursor: pointer;
 `;
 
-const ButtonText = styled.div<Pick<HamburgerButtonProps, "color">>`
+const ButtonText = styled.div<{ color: MainColorPaletteType }>`
   display: flex;
   height: 100%;
   position: relative;
@@ -38,81 +43,24 @@ const ButtonText = styled.div<Pick<HamburgerButtonProps, "color">>`
   text-transform: uppercase;
   transition: all 0.3s ease-out;
   opacity: 0%;
-  ${({ color }) => {
-    switch (color) {
-      case "pakistan-green":
-        return css`
-          color: #273e0a;
-        `;
-      case "field-drab":
-        return css`
-          color: #6f6406;
-        `;
-      case "chestnut":
-        return css`
-          color: #8d4a3a;
-        `;
-      case "brunswick-green":
-        return css`
-          color: #165c51;
-        `;
-    }
-  }}
+  color: ${({ color }) => MainColorPalette[color]};
 `;
 
-const Slicers = styled.div<Pick<HamburgerButtonProps, "color">>`
+const Slicers = styled.div<{ color: MainColorPaletteType }>`
   display: flex;
   width: 100%;
   height: 20%;
   transition: all 0.3s ease-out;
-
-  ${({ color }) => {
-    switch (color) {
-      case "pakistan-green":
-        return css`
-          background-color: #273e0a;
-        `;
-      case "field-drab":
-        return css`
-          background-color: #6f6406;
-        `;
-      case "chestnut":
-        return css`
-          background-color: #8d4a3a;
-        `;
-      case "brunswick-green":
-        return css`
-          background-color: #165c51;
-        `;
-    }
-  }}
+  background-color: ${({ color }) => MainColorPalette[color]};
 `;
 
-const Root = styled.div<Pick<HamburgerButtonProps, "color">>`
+const Root = styled.div<{ color: MainColorPaletteType }>`
   height: 50px;
+  margin-left: 20px;
   position: relative;
   transition: all 0.3s ease-out;
   cursor: pointer;
-  ${({ color }) => {
-    switch (color) {
-      case "pakistan-green":
-        return css`
-          background-color: #273e0a;
-        `;
-      case "field-drab":
-        return css`
-          background-color: #6f6406;
-        `;
-      case "chestnut":
-        return css`
-          background-color: #8d4a3a;
-        `;
-      case "brunswick-green":
-        return css`
-          background-color: #165c51;
-        `;
-    }
-  }}
+  background-color: ${({ color }) => MainColorPalette[color]};
 
   &:hover {
     ${LeafHamburger} {
@@ -128,11 +76,11 @@ const Root = styled.div<Pick<HamburgerButtonProps, "color">>`
   }
 `;
 
-export const HamburgerButton = ({
+export const HamburgerButton: FC<HamburgerButtonProps> = ({
   color,
   onClick,
   ...props
-}: HamburgerButtonProps) => {
+}) => {
   return (
     <Root color={color} onClick={onClick}>
       <ButtonText color={color}>Esplora</ButtonText>

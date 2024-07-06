@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Footer, FooterProps } from "./footer";
 import { carouselItems } from "../../carousel/carousel.fixture";
+
 const meta: Meta<typeof Footer> = {
   title: "Components/Footer",
   component: Footer,

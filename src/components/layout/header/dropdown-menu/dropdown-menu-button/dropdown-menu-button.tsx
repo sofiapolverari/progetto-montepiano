@@ -1,15 +1,19 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import {
+  SecondaryColorPalette,
+  MainColorPaletteType,
+} from "../../../../../constants/colors";
 
 interface DropdownMenuButtonProps {
   label?: string;
   linkUrl: string;
-  color: "reseda-green" | "citron" | "salmon" | "cambridge-blue"; // TO DO COLLEGARE AL BABBO
+  color: MainColorPaletteType;
 }
 
-const Root = styled.a<Pick<DropdownMenuButtonProps, "color">>`
+const Root = styled.a<{ color: MainColorPaletteType }>`
   display: flex;
-  height: 25px;
+  height: 40px;
   justify-content: center;
   align-items: center;
   font-size: 20px;
@@ -21,29 +25,11 @@ const Root = styled.a<Pick<DropdownMenuButtonProps, "color">>`
   padding-top: 10px;
   padding-bottom: 10px;
   transition: all 0.3s ease-out;
+  text-align: center;
 
   &:hover {
     color: #273e0a;
-    ${({ color }) => {
-      switch (color) {
-        case "reseda-green":
-          return css`
-            background-color: #828f71;
-          `;
-        case "citron":
-          return css`
-            background-color: #dfd261;
-          `;
-        case "salmon":
-          return css`
-            background-color: #dc8570;
-          `;
-        case "cambridge-blue":
-          return css`
-            background-color: #90bcac;
-          `;
-      }
-    }}
+    background-color: ${({ color }) => SecondaryColorPalette[color]};
   }
 `;
 

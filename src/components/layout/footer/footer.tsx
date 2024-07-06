@@ -3,42 +3,27 @@ import styled, { css } from "styled-components";
 import { SocialButton } from "../../social-button/social-button";
 import { CAROUSEL_HEIGHT } from "../../carousel/constants";
 import { Carousel, CarouselProps } from "../../carousel/carousel";
+import {
+  MainColorPalette,
+  MainColorPaletteType,
+} from "../../../constants/colors";
+import { FC } from "react";
 
 export interface FooterProps {
-  color: "pakistan-green" | "field-drab" | "chestnut" | "brunswick-green";
+  color: MainColorPaletteType;
   linkUrl: string[];
   body: string[];
-  carouselItems: CarouselProps["items"]
+  carouselItems: CarouselProps["items"];
 }
 
-const Root = styled.div`
+const Root = styled.div<{ color: MainColorPaletteType }>`
   flex-direction: column;
   position: relative;
   display: flex;
   width: 100%;
-  padding: 20px 50px;
   justify-content: space-between;
   align-items: center;
-  ${({ color }) => {
-    switch (color) {
-      case "pakistan-green":
-        return css`
-          background-color: #273e0a;
-        `;
-      case "field-drab":
-        return css`
-          background-color: #6f6406;
-        `;
-      case "chestnut":
-        return css`
-          background-color: #8d4a3a;
-        `;
-      case "brunswick-green":
-        return css`
-          background-color: #165c51;
-        `;
-    }
-  }}
+  background-color: ${({ color }) => MainColorPalette[color]};
 `;
 
 const TopWrapper = styled.div`
@@ -46,6 +31,7 @@ const TopWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  padding-top: 20px;
 `;
 
 const Title = styled.div`
@@ -53,19 +39,24 @@ const Title = styled.div`
   text-transform: uppercase;
   font-weight: bold;
   font-size: x-large;
+  padding-left: 20px;
 `;
 
 const SocialWrapper = styled.div`
   display: flex;
   gap: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
 `;
 
 const CarouselBox = styled.div`
-  height: ${CAROUSEL_HEIGHT}
+  height: ${CAROUSEL_HEIGHT};
 `;
 
 const TextBox = styled.div`
   color: #e9e5d9; //Alabaster
+  padding-top: 25px;
+  padding-bottom: 25px;
   text-align: center;
   align-self: stretch;
   @media (min-width: 1280px) {
@@ -76,29 +67,35 @@ const TextBox = styled.div`
   }
 `;
 
-export const Footer = ({ color, linkUrl, body, carouselItems, ...props }: FooterProps) => (
-    <Root color={color}>
-      <TopWrapper>
-        <Title>montepiano</Title>
-        <SocialWrapper>
-          {linkUrl?.[0] && (
-            <SocialButton linkUrl={linkUrl[0]} icon={"facebook"} />
-          )}
-          {linkUrl?.[1] && (
-            <SocialButton linkUrl={linkUrl[1]} icon={"instagram"} />
-          )}
-          {linkUrl?.[2] && (
-            <SocialButton linkUrl={linkUrl[2]} icon={"whatsapp"} />
-          )}
-        </SocialWrapper>
-      </TopWrapper>
-      <Carousel items={carouselItems} />
-      <TextBox>
-        {body.map((paragraph) => (
-          <div>{paragraph}</div>
-        ))}
-      </TextBox>
-    </Root>
-  );
+export const Footer: FC<FooterProps> = ({
+  color,
+  linkUrl,
+  body,
+  carouselItems,
+  ...props
+}) => (
+  <Root color={color}>
+    <TopWrapper>
+      <Title>montepiano</Title>
+      <SocialWrapper>
+        {linkUrl?.[0] && (
+          <SocialButton linkUrl={linkUrl[0]} icon={"facebook"} />
+        )}
+        {linkUrl?.[1] && (
+          <SocialButton linkUrl={linkUrl[1]} icon={"instagram"} />
+        )}
+        {linkUrl?.[2] && (
+          <SocialButton linkUrl={linkUrl[2]} icon={"whatsapp"} />
+        )}
+      </SocialWrapper>
+    </TopWrapper>
+    <Carousel items={carouselItems} />
+    <TextBox>
+      {body.map((paragraph) => (
+        <div>{paragraph}</div>
+      ))}
+    </TextBox>
+  </Root>
+);
 
 // TODO MANDARE A CAPO IL TESTO, CREARE CARTELLINA PER I SOCIAL, ALLINEARE LA TESTA

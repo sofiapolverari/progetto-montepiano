@@ -2,64 +2,34 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { DropdownMenuButton } from "./dropdown-menu-button/dropdown-menu-button";
 import { AnimatePresence, motion } from "framer-motion";
+import pagesList from "../../../../page-list.json";
+import {
+  MainColorPalette,
+  MainColorPaletteType,
+} from "../../../../constants/colors";
+import { FC } from "react";
 
 interface DropdownMenuProps {
-  color: "pakistan-green" | "field-drab" | "chestnut" | "brunswick-green";
+  color: MainColorPaletteType;
   isOpen: boolean;
 
   // TODO forse inseriremo le pagine che ci vanno
 }
 
-const Root = styled.div<Pick<DropdownMenuProps, "color">>`
-  width: 190px;
+const Root = styled.div<{ color: MainColorPaletteType }>`
+  width: 250px;
   padding: 20px 0px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-
-  ${({ color }) => {
-    switch (color) {
-      case "pakistan-green":
-        return css`
-          background-color: #273e0a;
-        `;
-      case "field-drab":
-        return css`
-          background-color: #6f6406;
-        `;
-      case "chestnut":
-        return css`
-          background-color: #8d4a3a;
-        `;
-      case "brunswick-green":
-        return css`
-          background-color: #165c51;
-        `;
-    }
-  }}
+  background-color: ${({ color }) => MainColorPalette[color]};
 `;
 
-export const DropdownMenu = ({
+export const DropdownMenu: FC<DropdownMenuProps> = ({
   color,
   isOpen,
   ...props
-}: DropdownMenuProps) => {
-  let buttonColor: "reseda-green" | "citron" | "salmon" | "cambridge-blue" =
-    "citron";
-  switch (color) {
-    case "pakistan-green":
-      buttonColor = "reseda-green";
-      break;
-    case "field-drab":
-      buttonColor = "citron";
-      break;
-    case "chestnut":
-      buttonColor = "salmon";
-      break;
-    case "brunswick-green":
-      buttonColor = "cambridge-blue";
-      break;
-  }
+}) => {
   return (
     <AnimatePresence mode={"popLayout"}>
       {isOpen && (
@@ -70,21 +40,13 @@ export const DropdownMenu = ({
           transition={{ ease: "easeOut", duration: 0.4 }}
         >
           <Root color={color}>
-            <DropdownMenuButton
-              color={buttonColor}
-              linkUrl="https://www.prolocomontepiano.com/"
-              label="Cosa Visitare"
-            />
-            <DropdownMenuButton
-              color={buttonColor}
-              linkUrl="https://www.prolocomontepiano.com/"
-              label="Servizi"
-            />
-            <DropdownMenuButton
-              color={buttonColor}
-              linkUrl="https://www.prolocomontepiano.com/"
-              label="Chalet"
-            />
+            {pagesList.map((page) => (
+              <DropdownMenuButton
+                linkUrl={page.url}
+                label={page.label}
+                color={color}
+              />
+            ))}
           </Root>
         </motion.div>
       )}

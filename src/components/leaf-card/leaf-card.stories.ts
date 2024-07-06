@@ -21,6 +21,37 @@ type Story = StoryObj<typeof LeafCard>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
   args: {
+    color: "pakistan-green",
+    label: "Villa Sperling",
+    linkUrl: "https://www.prolocomontepiano.com/",
+    imageUrl:
+      "https://www.infobuild.it/wp-content/uploads/progettazione-case-di-campagna.jpg",
+  },
+};
+
+export const FieldDrab: Story = {
+  args: {
+    color: "field-drab",
+    label: "Villa Sperling",
+    linkUrl: "https://www.prolocomontepiano.com/",
+    imageUrl:
+      "https://www.infobuild.it/wp-content/uploads/progettazione-case-di-campagna.jpg",
+  },
+};
+
+export const Chestnut: Story = {
+  args: {
+    color: "chestnut",
+    label: "Villa Sperling",
+    linkUrl: "https://www.prolocomontepiano.com/",
+    imageUrl:
+      "https://www.infobuild.it/wp-content/uploads/progettazione-case-di-campagna.jpg",
+  },
+};
+
+export const BrunswickGreen: Story = {
+  args: {
+    color: "brunswick-green",
     label: "Villa Sperling",
     linkUrl: "https://www.prolocomontepiano.com/",
     imageUrl:

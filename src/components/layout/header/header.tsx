@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { HeaderMain } from "./header-main/header-main";
 import { DropdownMenu } from "./dropdown-menu/dropdown-menu";
+import {
+  MainColorPalette,
+  MainColorPaletteType,
+} from "../../../constants/colors";
+import { FC } from "react";
 
 interface HeaderProps {
-  color: "pakistan-green" | "field-drab" | "chestnut" | "brunswick-green";
+  color: MainColorPaletteType;
   linkUrl: string[];
 }
 
@@ -13,7 +18,7 @@ const Root = styled.div`
   width: 100%;
 `;
 
-export const Header = ({ color, linkUrl, ...props }: HeaderProps) => {
+export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const HandleHamburgerButtonOnClick = () => {
     setIsOpen((isOpen) => !isOpen);

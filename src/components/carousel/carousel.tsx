@@ -5,6 +5,7 @@ import { CarouselItemProps } from "./carousel-item/carousel-item";
 import { AnimatePresence, motion } from "framer-motion";
 import { CAROUSEL_HEIGHT } from "./constants";
 import { getPositiveModulo } from "../../utils/get-positive-modulo";
+import { FC } from "react";
 
 export interface CarouselProps {
   items: Pick<CarouselItemProps, "linkUrl" | "imageUrl">[];
@@ -23,8 +24,8 @@ const ItemAnimation = styled(motion.div)`
   top: 0;
 `;
 
-export const Carousel = ({ items:_items, ...props }: CarouselProps) => {
-  const items = _items.length <3? [..._items, ..._items, ..._items]: _items;
+export const Carousel: FC<CarouselProps> = ({ items: _items, ...props }) => {
+  const items = _items.length < 3 ? [..._items, ..._items, ..._items] : _items;
   // If there are not enough items to animate, make them enough!
 
   const [index, SetIndex] = useState(0);
@@ -32,7 +33,7 @@ export const Carousel = ({ items:_items, ...props }: CarouselProps) => {
   useEffect(() => {
     setInterval(
       () => SetIndex((prevI) => getPositiveModulo(prevI + 1, items.length)),
-      1500
+      2000
     );
   }, []);
   // When the page is rendered start counting and keep sliding pages every 1.5 second
@@ -72,9 +73,7 @@ export const Carousel = ({ items:_items, ...props }: CarouselProps) => {
                 <CarouselItem
                   imageUrl={item.imageUrl}
                   linkUrl={item.linkUrl}
-                  $isCenter={
-                    position === "center"
-                  }
+                  $isCenter={position === "center"}
                 />
               </ItemAnimation>
             )
@@ -84,3 +83,7 @@ export const Carousel = ({ items:_items, ...props }: CarouselProps) => {
     </Root>
   );
 };
+
+// spazio tra i caroselli no gap al babbo, ma ai singoli item
+// spazio tra gli elementi sopra e sotto togliere padding dal root del footer e metterli singolarmente a tutti tranne al carosello
+//storybook che sborda da tutto schermo
