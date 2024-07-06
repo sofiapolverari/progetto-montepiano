@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { FC } from "react";
-import { Logo } from "../logo/logo";
+import { Logo } from "./logo/logo";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface HeroBannerProps {

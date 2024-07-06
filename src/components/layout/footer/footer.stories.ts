@@ -4,7 +4,7 @@ import { Footer, FooterProps } from "./footer";
 import { carouselItems } from "../../carousel/carousel.fixture";
 
 const meta: Meta<typeof Footer> = {
-  title: "Components/Footer",
+  title: "Layout/Footer",
   component: Footer,
 
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs

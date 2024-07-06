@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AnimatedWrapper } from "./animated-wrapper";
 import React from "react";
-import { LeafGrid } from "./leaf-grid/leaf-grid";
+import { LeafGrid } from "../leaf-grid/leaf-grid";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof AnimatedWrapper> = {

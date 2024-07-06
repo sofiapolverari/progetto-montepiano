@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { SocialButton } from "../../../social-button/social-button";
+import { SocialButton } from "../../social-button/social-button";
 import { HamburgerButton } from "../hamburger-button/hamburger-button";
 import {
   MainColorPalette,
