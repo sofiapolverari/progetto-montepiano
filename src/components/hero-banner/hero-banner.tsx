@@ -4,7 +4,7 @@ import { FC } from "react";
 import { Logo } from "./logo/logo";
 import { AnimatePresence, motion } from "framer-motion";
 
-interface HeroBannerProps {
+export interface HeroBannerProps {
   imageUrl: string;
   color: "alabaster" | "pakistan-green";
 }

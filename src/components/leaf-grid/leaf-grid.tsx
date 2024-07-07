@@ -3,7 +3,9 @@ import styled, { css } from "styled-components";
 import { FC } from "react";
 import { LeafCardEvent, LeafCardEventProps } from "./leaf-card-event/leaf-card-event";
 
-interface LeafGridProps {
+
+//TODO il colore delle card deve essere omogeneo quindi deve essere preso come proprietà e sovrascritto
+export interface LeafGridProps {
   items: LeafCardEventProps[];
 }
 

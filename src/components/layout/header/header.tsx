@@ -8,9 +8,9 @@ import {
 } from "../../../constants/colors";
 import { FC } from "react";
 
-interface HeaderProps {
+export interface HeaderProps {
   color: MainColorPaletteType;
-  linkUrl: string[];
+  linkUrl: string[]; //TODO commentare
 }
 
 const Root = styled.div`

@@ -4,7 +4,7 @@ import { MainColorPalette, MainColorPaletteType } from "../../constants/colors";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC } from "react";
 
-interface BannerImageProps {
+export interface BannerImageProps {
   label: string;
   color: MainColorPaletteType;
   direction: "left" | "right";

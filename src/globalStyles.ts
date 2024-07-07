@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family:'Afficher-Neue';
+    background-color: #e9e5d9;
   }
 `;
 
