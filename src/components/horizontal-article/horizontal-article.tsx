@@ -61,17 +61,18 @@ const DateLabel = styled.h2<{ color: MainColorPaletteType }>`
 `;
 
 const TextBox = styled.div<{ color: MainColorPaletteType }>`
-  width: 1000px;
   background-color: ${({ color }) => MainColorPalette[color]};
   color: #e9e5d9; //Alabaster
   padding: 15px;
   margin-top: 30px;
+  align-self: stretch;
   @media (min-width: 1280px) {
     font-size: 20px; //dim responsive del testo
   }
   @media (min-width: 1536px) {
     font-size: 40px;
   }
+  width: 1000px; // non c'è nel vertical
 `;
 
 const ImageWrapper = styled.div`
@@ -80,16 +81,20 @@ const ImageWrapper = styled.div`
   flex-basis: 30%;
 `;
 
+const ImageAnimatedWrapper = styled(motion.div)`
+  // non c'è
+  display: flex;
+  justify-content: center;
+`;
+
 const Photo = styled.img`
+  // diversa
   align-self: center;
   justify-self: center;
   width: 80%;
 `;
 
-const ImageAnimatedWrapper= styled(motion.div)`
-  display: flex;
-  justify-content: center;
-`
+// non abbiamo body wrapper e column wrapper
 
 export const HorizontalArticle: FC<HorizontalArticleProps> = ({
   title,

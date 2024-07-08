@@ -1,11 +1,9 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { FC } from "react";
-import { Logo } from "./logo/logo";
 import { AnimatePresence, motion } from "framer-motion";
 
 export interface HeroBannerProps {
-  imageUrl: string;
   color: "alabaster" | "pakistan-green";
 }
 
@@ -27,8 +25,14 @@ const Photo = styled.img`
 const LogoWrapper = styled.div`
   display: flex;
   z-index: 10;
-  padding-left: 100px;
+  padding-left: 50px;
+  padding-top: 50px;
   width: 40px;
+`;
+
+const Logo = styled.img`
+  width: 800px;
+  filter: drop-shadow(3px 5px 2px #e9e5d9);
 `;
 
 const ScrollDown = styled.div`
@@ -57,14 +61,10 @@ const ArrowAnimation = styled(motion.div)`
   width: 100%;
 `;
 
-export const HeroBanner: FC<HeroBannerProps> = ({
-  imageUrl,
-  color,
-  ...props
-}) => {
+export const HeroBanner: FC<HeroBannerProps> = ({ color, ...props }) => {
   return (
     <Root>
-      <Photo src={imageUrl} />
+      <Photo src="/photo-hero.jpg" />
       <AnimatePresence mode={"popLayout"}>
         <LogoAnimation
           initial={{ translateY: "-100%" }}
@@ -72,7 +72,13 @@ export const HeroBanner: FC<HeroBannerProps> = ({
           transition={{ ease: "easeOut", duration: 0.9 }}
         >
           <LogoWrapper>
-            <Logo color={color} />
+            <Logo
+              src={
+                color === "alabaster"
+                  ? "/logo_montepiano_alabaster_logotype.png"
+                  : "/logo_montepiano_pkgreen.png"
+              }
+            />
           </LogoWrapper>
         </LogoAnimation>
       </AnimatePresence>

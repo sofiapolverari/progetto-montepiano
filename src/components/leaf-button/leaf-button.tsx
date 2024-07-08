@@ -34,22 +34,24 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
   border-radius: 0% 50% 0% 50%;
   color: #e9e5d9;
   min-width: 100px;
-  height: 100px;
-  padding-left: 5px;
-  padding-right: 5px;
+  height: 75px;
+  padding-left: 15px;
+  padding-right: 15px;
   font-size: 20px;
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  font-weight: bold;
   transition: all 0.3s ease-out;
   cursor: pointer;
-
+  filter: drop-shadow(5px 5px 2px gray);
   background-color: ${({ color }) => MainColorPalette[color]};
 
   &:hover {
     color: #273e0a;
-    border-radius: 100%;
     background-color: ${({ color }) => SecondaryColorPalette[color]};
+    filter: drop-shadow(10px 10px 2px gray);
+    transform: translateY(-5px);
   }
 `;
 

@@ -26,6 +26,7 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 const Title = styled.h1<{ color: MainColorPaletteType }>`
@@ -33,7 +34,7 @@ const Title = styled.h1<{ color: MainColorPaletteType }>`
   font-size: 60px;
   text-transform: uppercase;
   text-align: center;
-  margin: 0px 0px 0px 40px;
+  margin-bottom: 20px;
   @media (min-width: 1280px) {
     font-size: 80px; //dim responsive del testo
   }
@@ -87,6 +88,8 @@ const TextBox = styled.div<{ color: MainColorPaletteType }>`
 `;
 
 const ImageWrapper = styled.div`
+  align-self: center;
+  justify-self: center;
   flex-basis: 30%;
 `;
 

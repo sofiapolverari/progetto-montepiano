@@ -31,15 +31,18 @@ const TopWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding-top: 20px;
+  padding: 20px;
 `;
 
-const Title = styled.div`
-  color: #e9e5d9; //Alabaster
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: x-large;
+const LogoWrapper = styled.div`
+  display: flex;
+  z-index: 10;
   padding-left: 20px;
+  padding-bottom: 40px;
+`;
+
+const Logo = styled.img`
+  width: 400px;
 `;
 
 const SocialWrapper = styled.div`
@@ -76,7 +79,9 @@ export const Footer: FC<FooterProps> = ({
 }) => (
   <Root color={color}>
     <TopWrapper>
-      <Title>montepiano</Title>
+      <LogoWrapper>
+        <Logo src="/logo_montepiano_alabaster_logotype.png" />
+      </LogoWrapper>
       <SocialWrapper>
         {linkUrl?.[0] && (
           <SocialButton linkUrl={linkUrl[0]} icon={"facebook"} />
