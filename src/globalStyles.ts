@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   src: url("./fonts/LTAfficherNeue-BoldText.otf") format('otf');
   font-weight: 700 1000;
 }
-
+  html,
   body {
     margin: 0;
     padding: 0;

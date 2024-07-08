@@ -10,7 +10,9 @@ interface SocialButtonProps {
   icon: "facebook" | "instagram" | "whatsapp";
 }
 
-const Root = styled.a``;
+const Root = styled.a`
+  color: #e9e5d9
+`;
 
 export const SocialButton: FC<SocialButtonProps> = ({
   linkUrl,
@@ -19,13 +21,13 @@ export const SocialButton: FC<SocialButtonProps> = ({
 }) => {
   let socialIcon = <></>;
   if (icon === "facebook") {
-    socialIcon = <Facebook fill="#e9e5d9" height={30} />;
+    socialIcon = <Facebook />;
   } else if (icon === "instagram") {
     socialIcon = (
-      <Instagram fill="#e9e5d9" height={30} style={{ color: "#e9e5d9" }} />
+      <Instagram />
     );
   } else if (icon === "whatsapp") {
-    socialIcon = <Whatsapp fill="#e9e5d9" height={30} />;
+    socialIcon = <Whatsapp />;
   }
 
   return <Root href={linkUrl}>{socialIcon}</Root>;

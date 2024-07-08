@@ -12,6 +12,8 @@ interface AnimatedTitleProps {
 
 const Root = styled.div`
   width: 100%;
+  position: relative;
+  overflow: hidden;
 `;
 
 const ColorBlock = styled.div<{ color: MainColorPaletteType }>`

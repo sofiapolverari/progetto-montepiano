@@ -19,10 +19,13 @@ import { AnimatedWrapper } from "../components/animated-wrapper/animated-wrapper
 import { LeafGrid } from "../components/leaf-grid/leaf-grid";
 import { BannerImage } from "../components/banner-image/banner-image";
 import { Footer } from "../components/layout/footer/footer";
+import GlobalStyle from "../globalStyles";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <div style={{width: "100vw", display:"flex", flexDirection: "column", overflow:"hidden"}}>
+    <>
+    <GlobalStyle/>
+    <div style={{width: "100vw", display:"flex", flexDirection: "column"}}>
       <Header {...mockHeader} />
       <HeroBanner {...mockHeroBanner} />
       <AnimatedTitle label={eventTitle} color="chestnut" direction="left" />
@@ -60,6 +63,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <BannerImage {...mockBannerImage}/>
       <Footer {...mockFooter}/>
     </div>
+    </>
   );
 };
 
