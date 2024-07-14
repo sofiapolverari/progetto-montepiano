@@ -17,25 +17,29 @@ const Root = styled.div`
 `;
 
 const ColorBlock = styled.div<{ color: MainColorPaletteType }>`
-  display: flex;
-  height: 30px;
-  justify-content: center;
+  height: 60px;
   background-color: ${({ color }) => MainColorPalette[color]};
+`;
+
+const TitleAnimation = styled(motion.div)`
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
 `;
 
 const Title = styled.div`
   color: #e9e5d9; //Alabaster
   font-weight: bold;
-  font-size: 20px;
+  font-size: 40px;
   display: flex;
   width: 100%;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  z-index: 10;
+  position: relative;
+  z-index: 20;
   text-align: center;
+  align-items: center;
   justify-content: center;
-  padding: 3px 0;
 `;
 
 export const AnimatedTitle: FC<AnimatedTitleProps> = ({
@@ -46,19 +50,16 @@ export const AnimatedTitle: FC<AnimatedTitleProps> = ({
 }) => {
   return (
     <Root>
-      <AnimatePresence mode={"popLayout"}>
-        {
-          <motion.div
-            {...{
-              initial: { translateX: direction === "left" ? "-100%" : "100%" },
-              whileInView: { translateX: "0%" },
-              transition: { duration: 0.9, ease: "easeOut" },
-            }}
-          >
-            <ColorBlock color={color} />
-          </motion.div>
-        }
-      </AnimatePresence>
+      <TitleAnimation
+        {...{
+          initial: { translateX: direction === "left" ? "-100%" : "100%" },
+          whileInView: { translateX: "0%" },
+          viewport: { once: true },
+          transition: { duration: 0.9, ease: "easeOut" },
+        }}
+      >
+        <ColorBlock color={color} />
+      </TitleAnimation>
 
       <Title> {label} </Title>
     </Root>

@@ -24,6 +24,7 @@ export const AnimatedWrapper: FC<PropsWithChildren<AnimatedWrapperProps>> = ({
             {...{
               initial: { translateX: direction === "left" ? "-100%" : "100%" },
               whileInView: { translateX: "0%" },
+              viewport: { once: true },
               transition: { duration: 0.9, ease: "easeOut" },
             }}
           >

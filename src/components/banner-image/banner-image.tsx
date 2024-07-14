@@ -44,7 +44,7 @@ const Mask = styled.div<{ color: MainColorPaletteType }>`
 `;
 
 const Photo = styled.img`
-  width: 100vw;
+  width: 100%;
   height: 80vh;
   object-fit: cover;
   transition: all 0.3s ease-out;
@@ -53,7 +53,7 @@ const Photo = styled.img`
 const Root = styled.a`
   display: flex;
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 80vh;
   overflow: hidden;
   justify-content: center;
@@ -89,8 +89,10 @@ export const BannerImage: FC<BannerImageProps> = ({
             {...{
               initial: { translateX: direction === "left" ? "-100%" : "100%" },
               whileInView: { translateX: "0%" },
+              viewport: { once: true },
               transition: { duration: 0.9, ease: "easeOut" },
             }}
+            style={{ width: "100%" }}
           >
             <Photo src={imageUrl} /> <Mask color={color} />
           </motion.div>

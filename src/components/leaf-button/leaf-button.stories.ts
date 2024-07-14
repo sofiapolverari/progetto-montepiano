@@ -29,7 +29,7 @@ export const Default: Story = {
 export const LongText: Story = {
   args: {
     color: "pakistan-green",
-    label: "Lorem Ipsum sic amet",
+    label: "Scopri tutti gli Eventi",
   },
 };
 

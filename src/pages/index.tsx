@@ -11,7 +11,8 @@ import {
   mockDiscoverGrid,
   chaletTitle,
   mockBannerImage,
-  mockFooter
+  mockFooter,
+  mockLeafButton,
 } from "../fixture-for-pages/homepage";
 import { HeroBanner } from "../components/hero-banner/hero-banner";
 import { AnimatedTitle } from "../components/animated-title/animated-title";
@@ -19,50 +20,64 @@ import { AnimatedWrapper } from "../components/animated-wrapper/animated-wrapper
 import { LeafGrid } from "../components/leaf-grid/leaf-grid";
 import { BannerImage } from "../components/banner-image/banner-image";
 import { Footer } from "../components/layout/footer/footer";
+import { LeafButton } from "../components/leaf-button/leaf-button";
 import GlobalStyle from "../globalStyles";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <>
-    <GlobalStyle/>
-    <div style={{width: "100vw", display:"flex", flexDirection: "column"}}>
-      <Header {...mockHeader} />
-      <HeroBanner {...mockHeroBanner} />
-      <AnimatedTitle label={eventTitle} color="chestnut" direction="left" />
-      <AnimatedWrapper direction="left">
+      <GlobalStyle />
+      <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+        <Header {...mockHeader} />
+        <HeroBanner {...mockHeroBanner} />
+        <AnimatedTitle label={eventTitle} color="chestnut" direction="left" />
+        <AnimatedWrapper direction="left">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <LeafGrid {...mockEventGrid} />
+            <LeafButton {...mockLeafButton} />
+          </div>
+        </AnimatedWrapper>
+        <AnimatedTitle
+          label={googleMapsTitle}
+          color="pakistan-green"
+          direction="right"
+        />
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            alignItems: "center",
             width: "100%",
+            height: "600px",
+            backgroundColor: "grey",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <LeafGrid {...mockEventGrid} />
-          Scopri tutti gli eventi
+          MAPPA GOOGLE
         </div>
-      </AnimatedWrapper>
-      <AnimatedTitle
-        label={googleMapsTitle}
-        color="pakistan-green"
-        direction="right"
-      />
-      <div style={{width:"100%", height:"600px", backgroundColor:"grey", display:"flex", alignItems:"center", justifyContent:"center"}}>
-        MAPPA GOOGLE
-      </div>
-      <AnimatedTitle
-        label={discoverTitle}
-        color="field-drab"
-        direction="left"
-      />
-      <AnimatedWrapper direction="left">
+        <AnimatedTitle
+          label={discoverTitle}
+          color="field-drab"
+          direction="left"
+        />
+        <AnimatedWrapper direction="left">
           <LeafGrid {...mockDiscoverGrid} />
-      </AnimatedWrapper>
-      <AnimatedTitle label={chaletTitle} color="brunswick-green" direction="right" />
-      <BannerImage {...mockBannerImage}/>
-      <Footer {...mockFooter}/>
-    </div>
+        </AnimatedWrapper>
+        <AnimatedTitle
+          label={chaletTitle}
+          color="brunswick-green"
+          direction="right"
+        />
+        <BannerImage {...mockBannerImage} />
+        <Footer {...mockFooter} />
+      </div>
     </>
   );
 };

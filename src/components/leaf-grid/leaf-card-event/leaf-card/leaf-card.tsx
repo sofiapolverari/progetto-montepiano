@@ -1,7 +1,10 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { FC } from "react";
-import { MainColorPalette, MainColorPaletteType } from "../../../../constants/colors";
+import {
+  MainColorPalette,
+  MainColorPaletteType,
+} from "../../../../constants/colors";
 
 interface LeafCardProps {
   // size?: "small" | "medium" | "large"; TODO
@@ -29,18 +32,45 @@ const Label = styled.div`
   cursor: pointer;
   transition: all 0.3s ease-out;
 `;
+
+const MaskAnimation = keyframes`
+  from {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+ }
+
+ to {
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+ }
+`;
+
+const MaskAnimationHover = keyframes`
+  from {
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+ }
+
+ to {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+ }
+`;
+
 const Mask = styled.div<{ color: MainColorPaletteType }>`
   position: absolute;
   left: 0;
   top: 0;
   z-index: 10;
-  width: 100%;
+  width: 101%;
   height: 100%;
-  border-radius: 0% 50% 0% 50%;
   background-color: ${({ color }) => MainColorPalette[color]};
-  opacity: 0;
-  transition: all 0.3s ease-out;
+  opacity: 0.7;
+  mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+  mask-size: 3000% 100%;
+  animation: ${MaskAnimation} 0.7s steps(29) forwards;
 `;
+
 const Root = styled.div`
   display: flex;
   position: relative;
@@ -59,10 +89,11 @@ const Root = styled.div`
     transform: translateY(-5px);
 
     ${Mask} {
-      opacity: 0.7;
+      animation: ${MaskAnimationHover} 0.7s steps(29) forwards;
     }
     ${Label} {
       opacity: 1;
+      transition-delay: 0.7s;
     }
   }
 `;
@@ -89,3 +120,5 @@ export const LeafCard: FC<LeafCardProps> = ({
     </a>
   );
 };
+
+//TODO sistemare la story per le dimensioni

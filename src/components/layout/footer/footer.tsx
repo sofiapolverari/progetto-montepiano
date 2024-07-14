@@ -31,7 +31,8 @@ const TopWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 `;
 
 const LogoWrapper = styled.div`
@@ -47,13 +48,15 @@ const Logo = styled.img`
 
 const SocialWrapper = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 30px;
   padding-bottom: 20px;
   padding-right: 20px;
 `;
 
 const CarouselBox = styled.div`
   height: ${CAROUSEL_HEIGHT};
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 const TextBox = styled.div`

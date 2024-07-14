@@ -14,8 +14,10 @@ interface HorizontalArticleProps {
   imageUrl: string;
   body: string;
   color: MainColorPaletteType;
-
-  //color
+  direction: "vertical" | "horizontal";
+  //propieta orizzontale o verticale
+  //duplica la foto, usa and e cerca di riusare il layout
+  //containerizzalo
 }
 
 // TODO frecce per switchare tra gli eventi per sfogliarli senza tornare alla pagina principale?
@@ -75,25 +77,28 @@ const TextBox = styled.div<{ color: MainColorPaletteType }>`
   width: 1000px; // non c'è nel vertical
 `;
 
-const ImageWrapper = styled.div`
-  align-self: center;
-  justify-self: center;
+const ImageWrapper = styled.div<Pick<HorizontalArticleProps, "direction">>`
+  align-self: ${({ direction }) =>
+    direction === "horizontal" ? "center" : "left"};
+  justify-self: ${({ direction }) =>
+    direction === "horizontal" ? "center" : "left"};
   flex-basis: 30%;
 `;
 
 const ImageAnimatedWrapper = styled(motion.div)`
-  // non c'è
   display: flex;
   justify-content: center;
 `;
 
-const Photo = styled.img`
-  // diversa
-  align-self: center;
-  justify-self: center;
-  width: 80%;
+const Photo = styled.img<Pick<HorizontalArticleProps, "direction">>`
+  align-self: ${({ direction }) =>
+    direction === "horizontal" ? "center" : "left"};
+  justify-self: ${({ direction }) =>
+    direction === "horizontal" ? "center" : "left"};
+  width: ${({ direction }) => (direction === "horizontal" ? "80%" : "100%")};
+  max-width: ${({ direction }) =>
+    direction === "horizontal" ? "auto" : "500px"};
 `;
-
 // non abbiamo body wrapper e column wrapper
 
 export const HorizontalArticle: FC<HorizontalArticleProps> = ({
@@ -102,41 +107,54 @@ export const HorizontalArticle: FC<HorizontalArticleProps> = ({
   imageUrl,
   body,
   color,
+  direction,
   ...props
 }) => {
   return (
     <Root>
-      <div
-        style={{
-          flexBasis: "40%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <AnimatePresence mode={"popLayout"}>
-          <motion.div
-            initial={{ translateX: "-100%", opacity: 0 }}
-            animate={{ translateX: "0%", opacity: 1 }}
-            // exit={{ translateY: "-100%" }}
-            transition={{ ease: "easeOut", duration: 0.4 }}
-          >
-            <Title color={color}> {title} </Title>
-            {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      <ImageWrapper>
-        <AnimatePresence mode={"popLayout"}>
+      <AnimatePresence mode={"popLayout"}>
+        <motion.div
+          initial={{ translateX: "-100%", opacity: 0 }}
+          animate={{ translateX: "0%", opacity: 1 }}
+          transition={{ ease: "easeOut", duration: 0.4 }}
+        >
+          <Title color={color}> {title} </Title>
+          {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
+        </motion.div>
+      </AnimatePresence>
+      {direction === "horizontal" && (
+        <ImageWrapper direction={direction}>
           <ImageAnimatedWrapper
-            initial={{ translateX: "100%", opacity: 0 }}
-            animate={{ translateX: "0%", opacity: 1 }}
-            transition={{ ease: "easeOut", duration: 0.4 }}
+            {...{
+              initial: { translateX: "100%", opacity: 0 },
+              whileInView: { translateX: "0%", opacity: 1 },
+              viewport: { once: true },
+              transition: { ease: "easeOut", duration: 0.4 },
+            }}
           >
-            <Photo src={imageUrl} />
+            <Photo src={imageUrl} direction={direction} />
           </ImageAnimatedWrapper>
-        </AnimatePresence>
-      </ImageWrapper>
+        </ImageWrapper>
+      )}
       <TextBox color={color}> {body} </TextBox>
+      {direction === "vertical" && (
+        <ImageWrapper direction={direction}>
+          <ImageAnimatedWrapper
+            {...{
+              initial: { translateX: "100%", opacity: 0 },
+              whileInView: { translateX: "0%", opacity: 1 },
+              viewport: { once: true },
+              transition: { ease: "easeOut", duration: 0.4 },
+            }}
+          >
+            <Photo src={imageUrl} direction={direction} />
+          </ImageAnimatedWrapper>
+        </ImageWrapper>
+      )}
     </Root>
   );
 };
+
+// sistema i nomi
+// e importante fixare le stories? al momento alternati direx e link
+//controllare il doppione photo e image wrapper

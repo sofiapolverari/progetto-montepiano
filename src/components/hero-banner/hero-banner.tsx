@@ -9,13 +9,25 @@ export interface HeroBannerProps {
 
 const Root = styled.div`
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   position: relative;
+  overflow: hidden;
+`;
+
+const ColorMask = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #e9e5d9; //Alabaster
+  opacity: 20%;
+  z-index: 5;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 `;
 
 const Photo = styled.img`
-  display: flex;
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -24,14 +36,13 @@ const Photo = styled.img`
 
 const LogoWrapper = styled.div`
   display: flex;
-  z-index: 10;
   padding-left: 50px;
-  padding-top: 50px;
+  padding-top: 100px;
   width: 40px;
 `;
 
 const Logo = styled.img`
-  width: 800px;
+  width: 700px;
   filter: drop-shadow(3px 5px 2px #e9e5d9);
 `;
 
@@ -64,6 +75,7 @@ const ArrowAnimation = styled(motion.div)`
 export const HeroBanner: FC<HeroBannerProps> = ({ color, ...props }) => {
   return (
     <Root>
+      <ColorMask />
       <Photo src="/photo-hero.jpg" />
       <AnimatePresence mode={"popLayout"}>
         <LogoAnimation

@@ -16,6 +16,7 @@ export interface HeaderProps {
 const Root = styled.div`
   position: absolute;
   width: 100%;
+  z-index: 100;
 `;
 
 export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {

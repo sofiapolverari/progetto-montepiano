@@ -7,7 +7,7 @@ import {
 } from "../../constants/colors";
 import { FC } from "react";
 
-interface LeafButtonProps {
+export interface LeafButtonProps {
   /**
    * Is this the principal call to action on the page?
    */
@@ -31,12 +31,13 @@ interface LeafButtonProps {
  */
 const Root = styled.div<{ color: MainColorPaletteType }>`
   display: flex;
-  border-radius: 0% 50% 0% 50%;
+  border-radius: 0% 40% 0% 40%;
   color: #e9e5d9;
   min-width: 100px;
-  height: 75px;
+  height: 60px;
   padding-left: 15px;
   padding-right: 15px;
+  margin-bottom: 35px;
   font-size: 20px;
   justify-content: center;
   align-items: center;
