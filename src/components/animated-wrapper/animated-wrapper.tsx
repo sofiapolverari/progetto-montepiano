@@ -17,7 +17,7 @@ export const AnimatedWrapper: FC<PropsWithChildren<AnimatedWrapperProps>> = ({
   ...props
 }) => {
   return (
-    <Root>
+    <Root {...props}>
       <AnimatePresence mode={"popLayout"}>
         {
           <motion.div

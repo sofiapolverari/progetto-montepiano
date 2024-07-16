@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { HeaderMain } from "./header-main/header-main";
 import { DropdownMenu } from "./dropdown-menu/dropdown-menu";
@@ -36,6 +36,8 @@ export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {
   const HandleHamburgerButtonOnClick = () => {
     setIsOpen((isOpen) => !isOpen);
   };
+
+  const dropDowMenuRef = useRef<HTMLDivElement>(null);
   return (
     <Root>
       <HeaderMain
@@ -43,7 +45,7 @@ export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {
         linkUrl={linkUrl}
         hamburgerButtonOnClick={HandleHamburgerButtonOnClick}
       />
-      <DropdownMenu color={color} isOpen={isOpen} />
+      <DropdownMenu color={color} isOpen={isOpen} ref={dropDowMenuRef} />
     </Root>
   );
 };

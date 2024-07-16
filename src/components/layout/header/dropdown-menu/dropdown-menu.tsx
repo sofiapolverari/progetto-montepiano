@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled, { css } from "styled-components";
 import { DropdownMenuButton } from "./dropdown-menu-button/dropdown-menu-button";
 import { AnimatePresence, motion } from "framer-motion";
@@ -25,31 +25,29 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
   background-color: ${({ color }) => MainColorPalette[color]};
 `;
 
-export const DropdownMenu: FC<DropdownMenuProps> = ({
-  color,
-  isOpen,
-  ...props
-}) => {
-  return (
-    <AnimatePresence mode={"popLayout"}>
-      {isOpen && (
-        <motion.div
-          initial={{ translateY: "-100%" }}
-          animate={{ translateY: "0%" }}
-          exit={{ translateY: "-100%" }}
-          transition={{ ease: "easeOut", duration: 0.4 }}
-        >
-          <Root color={color}>
-            {pagesList.map((page) => (
-              <DropdownMenuButton
-                linkUrl={page.url}
-                label={page.label}
-                color={color}
-              />
-            ))}
-          </Root>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};
+export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
+  ({ color, isOpen, ...props }, ref) => {
+    return (
+      <AnimatePresence mode={"popLayout"}>
+        {isOpen && (
+          <motion.div
+            initial={{ translateY: "-100%" }}
+            animate={{ translateY: "0%" }}
+            exit={{ translateY: "-100%" }}
+            transition={{ ease: "easeOut", duration: 0.4 }}
+          >
+            <Root color={color} ref={ref}>
+              {pagesList.map((page) => (
+                <DropdownMenuButton
+                  linkUrl={page.url}
+                  label={page.label}
+                  color={color}
+                />
+              ))}
+            </Root>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  }
+);
