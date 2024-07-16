@@ -19,6 +19,18 @@ const Root = styled.div`
   z-index: 100;
 `;
 
+/*useEffect(effect:() => {
+
+  const closeDropdown = e => {if (e.path[0].tagName !== 'BUTTON') {setIsOpen(value: false);
+  }
+};
+
+document.body.addEventListener(type: 'click', closeDropdown);
+
+return () => document.body.addEventListener(type: 'click', closeDropdown);
+
+}, deps:[]);*/
+
 export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const HandleHamburgerButtonOnClick = () => {

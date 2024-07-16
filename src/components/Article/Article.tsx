@@ -8,16 +8,13 @@ import {
   MainColorPaletteType,
 } from "../../constants/colors";
 
-interface HorizontalArticleProps {
+interface ArticleProps {
   title: string;
   dateLabel?: string;
   imageUrl: string;
   body: string;
   color: MainColorPaletteType;
   direction: "vertical" | "horizontal";
-  //propieta orizzontale o verticale
-  //duplica la foto, usa and e cerca di riusare il layout
-  //containerizzalo
 }
 
 // TODO frecce per switchare tra gli eventi per sfogliarli senza tornare alla pagina principale?
@@ -25,8 +22,17 @@ interface HorizontalArticleProps {
 
 const Root = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 25px;
+  padding-left: 50px;
+  padding-right: 50px;
+`;
+
+const ColumnWrapper = styled.div`
+  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
@@ -50,6 +56,7 @@ const DateLabel = styled.h2<{ color: MainColorPaletteType }>`
   color: ${({ color }) => SecondaryColorPalette[color]};
   font-size: 40px;
   text-transform: uppercase;
+  padding-bottom: 20px;
   margin: 0px;
   /* line-height: 40px; */
   @media (min-width: 1280px) {
@@ -74,10 +81,10 @@ const TextBox = styled.div<{ color: MainColorPaletteType }>`
   @media (min-width: 1536px) {
     font-size: 40px;
   }
-  width: 1000px; // non c'è nel vertical
+  max-width: 1000px;
 `;
 
-const ImageWrapper = styled.div<Pick<HorizontalArticleProps, "direction">>`
+const ImageWrapper = styled.div<Pick<ArticleProps, "direction">>`
   align-self: ${({ direction }) =>
     direction === "horizontal" ? "center" : "left"};
   justify-self: ${({ direction }) =>
@@ -90,18 +97,14 @@ const ImageAnimatedWrapper = styled(motion.div)`
   justify-content: center;
 `;
 
-const Photo = styled.img<Pick<HorizontalArticleProps, "direction">>`
-  align-self: ${({ direction }) =>
-    direction === "horizontal" ? "center" : "left"};
-  justify-self: ${({ direction }) =>
-    direction === "horizontal" ? "center" : "left"};
+const Photo = styled.img<Pick<ArticleProps, "direction">>`
   width: ${({ direction }) => (direction === "horizontal" ? "80%" : "100%")};
-  max-width: ${({ direction }) =>
+  min-width: ${({ direction }) =>
     direction === "horizontal" ? "auto" : "500px"};
 `;
 // non abbiamo body wrapper e column wrapper
 
-export const HorizontalArticle: FC<HorizontalArticleProps> = ({
+export const Article: FC<ArticleProps> = ({
   title,
   dateLabel,
   imageUrl,
@@ -112,31 +115,41 @@ export const HorizontalArticle: FC<HorizontalArticleProps> = ({
 }) => {
   return (
     <Root>
-      <AnimatePresence mode={"popLayout"}>
-        <motion.div
-          initial={{ translateX: "-100%", opacity: 0 }}
-          animate={{ translateX: "0%", opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 0.4 }}
-        >
-          <Title color={color}> {title} </Title>
-          {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
-        </motion.div>
-      </AnimatePresence>
-      {direction === "horizontal" && (
-        <ImageWrapper direction={direction}>
-          <ImageAnimatedWrapper
-            {...{
-              initial: { translateX: "100%", opacity: 0 },
-              whileInView: { translateX: "0%", opacity: 1 },
-              viewport: { once: true },
-              transition: { ease: "easeOut", duration: 0.4 },
-            }}
+      <ColumnWrapper>
+        <AnimatePresence mode={"popLayout"}>
+          <motion.div
+            initial={{ translateX: "-100%", opacity: 0 }}
+            animate={{ translateX: "0%", opacity: 1 }}
+            transition={{ ease: "easeOut", duration: 0.4 }}
           >
-            <Photo src={imageUrl} direction={direction} />
-          </ImageAnimatedWrapper>
-        </ImageWrapper>
-      )}
-      <TextBox color={color}> {body} </TextBox>
+            <Title color={color}> {title} </Title>
+            {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
+          </motion.div>
+        </AnimatePresence>
+        {direction === "horizontal" && (
+          <ImageWrapper direction={direction}>
+            <ImageAnimatedWrapper
+              {...{
+                initial: { translateX: "100%", opacity: 0 },
+                whileInView: { translateX: "0%", opacity: 1 },
+                viewport: { once: true },
+                transition: { ease: "easeOut", duration: 0.4 },
+              }}
+            >
+              <Photo src={imageUrl} direction={direction} />
+            </ImageAnimatedWrapper>
+          </ImageWrapper>
+        )}
+        <AnimatePresence mode={"popLayout"}>
+          <motion.div
+            initial={{ translateX: "-100%", opacity: 0 }}
+            animate={{ translateX: "0%", opacity: 1 }}
+            transition={{ ease: "easeOut", duration: 0.4 }}
+          >
+            <TextBox color={color}> {body} </TextBox>
+          </motion.div>
+        </AnimatePresence>
+      </ColumnWrapper>
       {direction === "vertical" && (
         <ImageWrapper direction={direction}>
           <ImageAnimatedWrapper
@@ -155,6 +168,7 @@ export const HorizontalArticle: FC<HorizontalArticleProps> = ({
   );
 };
 
-// sistema i nomi
 // e importante fixare le stories? al momento alternati direx e link
-//controllare il doppione photo e image wrapper
+//controllare i doppioni
+// la ripeto l'animazione del text box?
+//containerizzalo

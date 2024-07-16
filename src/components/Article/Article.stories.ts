@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { HorizontalArticle } from "./horizontal-article";
+import { Article } from "./Article";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof HorizontalArticle> = {
-  title: "Components/HorizontalArticle",
-  component: HorizontalArticle,
+const meta: Meta<typeof Article> = {
+  title: "Components/Article",
+  component: Article,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
@@ -16,7 +16,7 @@ const meta: Meta<typeof HorizontalArticle> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof HorizontalArticle>;
+type Story = StoryObj<typeof Article>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 
