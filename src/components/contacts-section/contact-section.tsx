@@ -40,6 +40,16 @@ const Body = styled.h6`
   font-size: 30;
 `;
 
+const Line = styled.div`
+  width: 100%;
+  height: 5px;
+  background-color: #273e0a; //pakistan-green
+  /* initial: { translateX: direction === "left" ? "-100%" : "100%" },
+              whileInView: { translateX: "0%" },
+              viewport: { once: true },
+              transition: { duration: 0.9, ease: "easeOut" }, */
+`;
+
 export const ContactSection: FC<ContactSectionProps> = ({
   title,
   subtitle,

@@ -36,14 +36,26 @@ export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {
   const HandleHamburgerButtonOnClick = () => {
     setIsOpen((isOpen) => !isOpen);
   };
-
   const dropDowMenuRef = useRef<HTMLDivElement>(null);
+  const dropDownButtonRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutsideDropdown = (e: any) => {
+    if (
+      !dropDowMenuRef.current?.contains(e.target as Node) &&
+      !dropDownButtonRef.current?.contains(e.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+  window.addEventListener("click", handleClickOutsideDropdown);
+
   return (
     <Root>
       <HeaderMain
         color={color}
         linkUrl={linkUrl}
         hamburgerButtonOnClick={HandleHamburgerButtonOnClick}
+        dropdownButtonRef={dropDownButtonRef}
       />
       <DropdownMenu color={color} isOpen={isOpen} ref={dropDowMenuRef} />
     </Root>

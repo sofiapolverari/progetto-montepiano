@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ForwardedRef } from "react";
 import styled, { css } from "styled-components";
 import { SocialButton } from "../../social-button/social-button";
 import { HamburgerButton } from "../hamburger-button/hamburger-button";
@@ -12,6 +12,7 @@ interface HeaderMainProps {
   color: MainColorPaletteType;
   hamburgerButtonOnClick?: () => void;
   linkUrl: string[];
+  dropdownButtonRef: ForwardedRef<HTMLDivElement>;
 }
 
 const Root = styled.div<{ color: MainColorPaletteType }>`
@@ -34,11 +35,16 @@ export const HeaderMain: FC<HeaderMainProps> = ({
   color,
   hamburgerButtonOnClick,
   linkUrl,
+  dropdownButtonRef,
   ...props
 }) => {
   return (
     <Root color={color}>
-      <HamburgerButton color={color} onClick={hamburgerButtonOnClick} />
+      <HamburgerButton
+        color={color}
+        onClick={hamburgerButtonOnClick}
+        ref={dropdownButtonRef}
+      />
       <SocialWrapper>
         {linkUrl?.[0] && (
           <SocialButton linkUrl={linkUrl[0]} icon={"facebook"} />

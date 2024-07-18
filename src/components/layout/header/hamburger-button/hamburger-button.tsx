@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled, { css } from "styled-components";
 import {
   MainColorPalette,
@@ -76,18 +76,16 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
   }
 `;
 
-export const HamburgerButton: FC<HamburgerButtonProps> = ({
-  color,
-  onClick,
-  ...props
-}) => {
-  return (
-    <Root color={color} onClick={onClick}>
-      <ButtonText color={color}>Esplora</ButtonText>
-      <LeafHamburger>
-        <Slicers color={color}></Slicers>
-        <Slicers color={color}></Slicers>
-      </LeafHamburger>
-    </Root>
-  );
-};
+export const HamburgerButton = forwardRef<HTMLDivElement, HamburgerButtonProps>(
+  ({ color, onClick, ...props }, ref) => {
+    return (
+      <Root color={color} onClick={onClick} ref={ref}>
+        <ButtonText color={color}>Esplora</ButtonText>
+        <LeafHamburger>
+          <Slicers color={color}></Slicers>
+          <Slicers color={color}></Slicers>
+        </LeafHamburger>
+      </Root>
+    );
+  }
+);

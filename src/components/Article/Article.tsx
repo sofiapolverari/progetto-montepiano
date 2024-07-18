@@ -8,6 +8,8 @@ import {
   MainColorPaletteType,
 } from "../../constants/colors";
 
+//TODO quando l'articolo è horizontal le animazioni dovrebbero entrare leggermente da sotto passando da opacità 0 a opacità 1
+
 interface ArticleProps {
   title: string;
   dateLabel?: string;
@@ -84,17 +86,10 @@ const TextBox = styled.div<{ color: MainColorPaletteType }>`
   max-width: 1000px;
 `;
 
-const ImageWrapper = styled.div<Pick<ArticleProps, "direction">>`
-  align-self: ${({ direction }) =>
-    direction === "horizontal" ? "center" : "left"};
-  justify-self: ${({ direction }) =>
-    direction === "horizontal" ? "center" : "left"};
-  flex-basis: 30%;
-`;
-
 const ImageAnimatedWrapper = styled(motion.div)`
   display: flex;
   justify-content: center;
+  flex-basis: 30%;
 `;
 
 const Photo = styled.img<Pick<ArticleProps, "direction">>`
@@ -102,7 +97,6 @@ const Photo = styled.img<Pick<ArticleProps, "direction">>`
   min-width: ${({ direction }) =>
     direction === "horizontal" ? "auto" : "500px"};
 `;
-// non abbiamo body wrapper e column wrapper
 
 export const Article: FC<ArticleProps> = ({
   title,
@@ -116,6 +110,7 @@ export const Article: FC<ArticleProps> = ({
   return (
     <Root>
       <ColumnWrapper>
+        {/* TODO trasformare in while in view invece che animate presence */}
         <AnimatePresence mode={"popLayout"}>
           <motion.div
             initial={{ translateX: "-100%", opacity: 0 }}
@@ -127,19 +122,18 @@ export const Article: FC<ArticleProps> = ({
           </motion.div>
         </AnimatePresence>
         {direction === "horizontal" && (
-          <ImageWrapper direction={direction}>
-            <ImageAnimatedWrapper
-              {...{
-                initial: { translateX: "100%", opacity: 0 },
-                whileInView: { translateX: "0%", opacity: 1 },
-                viewport: { once: true },
-                transition: { ease: "easeOut", duration: 0.4 },
-              }}
-            >
-              <Photo src={imageUrl} direction={direction} />
-            </ImageAnimatedWrapper>
-          </ImageWrapper>
+          <ImageAnimatedWrapper
+            {...{
+              initial: { translateX: "100%", opacity: 0 },
+              whileInView: { translateX: "0%", opacity: 1 },
+              viewport: { once: true },
+              transition: { ease: "easeOut", duration: 0.4 },
+            }}
+          >
+            <Photo src={imageUrl} direction={direction} />
+          </ImageAnimatedWrapper>
         )}
+        {/* TODO cambiare in while in view */}
         <AnimatePresence mode={"popLayout"}>
           <motion.div
             initial={{ translateX: "-100%", opacity: 0 }}
@@ -151,18 +145,16 @@ export const Article: FC<ArticleProps> = ({
         </AnimatePresence>
       </ColumnWrapper>
       {direction === "vertical" && (
-        <ImageWrapper direction={direction}>
-          <ImageAnimatedWrapper
-            {...{
-              initial: { translateX: "100%", opacity: 0 },
-              whileInView: { translateX: "0%", opacity: 1 },
-              viewport: { once: true },
-              transition: { ease: "easeOut", duration: 0.4 },
-            }}
-          >
-            <Photo src={imageUrl} direction={direction} />
-          </ImageAnimatedWrapper>
-        </ImageWrapper>
+        <ImageAnimatedWrapper
+          {...{
+            initial: { translateX: "100%", opacity: 0 },
+            whileInView: { translateX: "0%", opacity: 1 },
+            viewport: { once: true },
+            transition: { ease: "easeOut", duration: 0.4 },
+          }}
+        >
+          <Photo src={imageUrl} direction={direction} />
+        </ImageAnimatedWrapper>
       )}
     </Root>
   );
