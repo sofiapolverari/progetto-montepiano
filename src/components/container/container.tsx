@@ -8,7 +8,7 @@ const Root = styled.div`
 
 const Wrapper = styled.div`
   max-width: 1290px;
-  padding: 0px 20px;
+  padding: 0px 50px;
   margin-left: auto;
   margin-right: auto;
   position: relative;

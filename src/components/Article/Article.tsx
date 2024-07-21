@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import React from "react";
 import styled, { css } from "styled-components";
 import { FC } from "react";
@@ -7,6 +7,7 @@ import {
   SecondaryColorPalette,
   MainColorPaletteType,
 } from "../../constants/colors";
+import { Container } from "../container/container";
 
 //TODO quando l'articolo è horizontal le animazioni dovrebbero entrare leggermente da sotto passando da opacità 0 a opacità 1
 
@@ -22,14 +23,12 @@ interface ArticleProps {
 // TODO frecce per switchare tra gli eventi per sfogliarli senza tornare alla pagina principale?
 // TODO filtro per ordinarli per data? Mettere in evidenza?
 
-const Root = styled.div`
+const Root = styled(Container)`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
   gap: 25px;
-  padding-left: 50px;
-  padding-right: 50px;
 `;
 
 const ColumnWrapper = styled.div`
@@ -110,39 +109,67 @@ export const Article: FC<ArticleProps> = ({
   return (
     <Root>
       <ColumnWrapper>
-        {/* TODO trasformare in while in view invece che animate presence */}
-        <AnimatePresence mode={"popLayout"}>
+        {direction === "horizontal" ? (
           <motion.div
-            initial={{ translateX: "-100%", opacity: 0 }}
-            animate={{ translateX: "0%", opacity: 1 }}
-            transition={{ ease: "easeOut", duration: 0.4 }}
+            {...{
+              initial: { translateY: "+100%", opacity: 0 },
+              whileInView: { translateY: "0%", opacity: 1 },
+              viewport: { once: true },
+              transition: { ease: "easeOut", duration: 0.4 },
+            }}
           >
             <Title color={color}> {title} </Title>
             {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
           </motion.div>
-        </AnimatePresence>
-        {direction === "horizontal" && (
-          <ImageAnimatedWrapper
+        ) : (
+          <motion.div
             {...{
-              initial: { translateX: "100%", opacity: 0 },
+              initial: { translateX: "-100%", opacity: 0 },
               whileInView: { translateX: "0%", opacity: 1 },
               viewport: { once: true },
               transition: { ease: "easeOut", duration: 0.4 },
             }}
           >
+            <Title color={color}> {title} </Title>
+            {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
+          </motion.div>
+        )}
+
+        {direction === "horizontal" && (
+          <ImageAnimatedWrapper
+            {...{
+              initial: { opacity: 0 },
+              whileInView: { opacity: 1 },
+              viewport: { once: true },
+              transition: { ease: "easeOut", duration: 0.4, delay: 0.5 },
+            }}
+          >
             <Photo src={imageUrl} direction={direction} />
           </ImageAnimatedWrapper>
         )}
-        {/* TODO cambiare in while in view */}
-        <AnimatePresence mode={"popLayout"}>
+        {direction === "horizontal" ? (
           <motion.div
-            initial={{ translateX: "-100%", opacity: 0 }}
-            animate={{ translateX: "0%", opacity: 1 }}
-            transition={{ ease: "easeOut", duration: 0.4 }}
+            {...{
+              initial: { translateY: "+100%", opacity: 0 },
+              whileInView: { translateY: "0%", opacity: 1 },
+              viewport: { once: true },
+              transition: { ease: "easeOut", duration: 0.4 },
+            }}
           >
             <TextBox color={color}> {body} </TextBox>
           </motion.div>
-        </AnimatePresence>
+        ) : (
+          <motion.div
+            {...{
+              initial: { translateX: "-100%", opacity: 0 },
+              whileInView: { translateX: "0%", opacity: 1 },
+              viewport: { once: true },
+              transition: { ease: "easeOut", duration: 0.4 },
+            }}
+          >
+            <TextBox color={color}> {body} </TextBox>
+          </motion.div>
+        )}
       </ColumnWrapper>
       {direction === "vertical" && (
         <ImageAnimatedWrapper
@@ -159,8 +186,3 @@ export const Article: FC<ArticleProps> = ({
     </Root>
   );
 };
-
-// e importante fixare le stories? al momento alternati direx e link
-//controllare i doppioni
-// la ripeto l'animazione del text box?
-//containerizzalo

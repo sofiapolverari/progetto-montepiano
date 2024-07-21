@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { MainColorPalette, MainColorPaletteType } from "../../constants/colors";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC } from "react";
@@ -31,16 +31,44 @@ const Label = styled.div`
   cursor: pointer;
   transition: all 0.3s ease-out;
 `;
+
+const MaskAnimation = keyframes`
+  from {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+ }
+
+ to {
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+ }
+`;
+
+const MaskAnimationHover = keyframes`
+  from {
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+ }
+
+ to {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+ }
+`;
+
 const Mask = styled.div<{ color: MainColorPaletteType }>`
   position: absolute;
   left: 0;
   top: 0;
   z-index: 10;
-  width: 100%;
+  width: 101%;
   height: 100%;
   background-color: ${({ color }) => MainColorPalette[color]};
-  opacity: 0;
-  transition: all 0.3s ease-out;
+  opacity: 0.7;
+  //transition: all 0.3s ease-out;
+  mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
+  mask-size: 3000% 100%;
+  animation: ${MaskAnimation} 0.7s steps(29) forwards;
 `;
 
 const Photo = styled.img`
@@ -62,13 +90,13 @@ const Root = styled.a`
   cursor: pointer;
   &:hover {
     ${Mask} {
-      opacity: 0.7;
+      animation: ${MaskAnimationHover} 0.7s steps(29) forwards;
     }
     ${Label} {
       opacity: 1;
     }
     ${Photo} {
-      transform: scale(1.5); //non funziona
+      transform: scale(1.5);
     }
   }
 `;

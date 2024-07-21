@@ -80,10 +80,12 @@ const Root = styled.div`
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease-out;
+  transition: all 1s ease-out;
   filter: drop-shadow(5px 5px 2px gray);
   cursor: pointer;
   &:hover {
+    border-radius: 100%;
+
     filter: drop-shadow(10px 10px 2px gray);
 
     transform: translateY(-5px);

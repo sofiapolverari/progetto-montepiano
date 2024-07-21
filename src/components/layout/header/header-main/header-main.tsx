@@ -23,6 +23,8 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ color }) => MainColorPalette[color]};
+  padding-top: 5px;
+  padding-bottom: 5px;
 `;
 
 const SocialWrapper = styled.div`

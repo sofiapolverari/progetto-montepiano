@@ -35,9 +35,7 @@ export const FieldDrab: Story = {
     color: "field-drab",
     title: "Aperitivo Erbomagico",
     dateLabel: "25 Giugno ore 18.00",
-    imageUrl:
-      "https://www.fineprint.co.uk/wp-content/uploads/2022/05/A-PaperSizes-768x1009.jpg",
-
+    imageUrl: "https://www.chairoffice.co.uk/media/17298/paper-sizes.jpg",
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus diam lorem, quis malesuada dolor aliquet at. Pellentesque dignissim ipsum vel sapien commodo porta. Nam eleifend lorem vitae lacus dictum, eu porttitor dui pharetra. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus diam lorem, quis malesuada dolor aliquet at. Pellentesque dignissim ipsum vel sapien commodo porta. Nam eleifend lorem vitae lacus dictum, eu porttitor dui pharetra.",
     direction: "horizontal",
   },
@@ -57,8 +55,7 @@ export const BrunswickGreen: Story = {
     color: "brunswick-green",
     title: "Aperitivo Erbomagico",
     dateLabel: "25 Giugno ore 18.00",
-    imageUrl:
-      "https://www.fineprint.co.uk/wp-content/uploads/2022/05/A-PaperSizes-768x1009.jpg",
+    imageUrl: "https://www.chairoffice.co.uk/media/17298/paper-sizes.jpg",
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus diam lorem, quis malesuada dolor aliquet at. Pellentesque dignissim ipsum vel sapien commodo porta. Nam eleifend lorem vitae lacus dictum, eu porttitor dui pharetra. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus diam lorem, quis malesuada dolor aliquet at. Pellentesque dignissim ipsum vel sapien commodo porta. Nam eleifend lorem vitae lacus dictum, eu porttitor dui pharetra.",
     direction: "horizontal",
   },
@@ -69,7 +66,8 @@ export const Vertical: Story = {
     color: "pakistan-green",
     title: "Aperitivo Erbomagico",
     dateLabel: "25 Giugno ore 18.00",
-    imageUrl: "https://www.chairoffice.co.uk/media/17298/paper-sizes.jpg",
+    imageUrl:
+      "https://www.fineprint.co.uk/wp-content/uploads/2022/05/A-PaperSizes-768x1009.jpg",
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus diam lorem, quis malesuada dolor aliquet at. Pellentesque dignissim ipsum vel sapien commodo porta. Nam eleifend lorem vitae lacus dictum, eu porttitor dui pharetra. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus diam lorem, quis malesuada dolor aliquet at. Pellentesque dignissim ipsum vel sapien commodo porta. Nam eleifend lorem vitae lacus dictum, eu porttitor dui pharetra.",
     direction: "vertical",
   },
