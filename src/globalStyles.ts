@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
     font-family:'Afficher-Neue';
     background-color: #e9e5d9;
   }
+  * {
+    box-sizing: border-box;
+    margin: 0
+  }
 `;
 
 export default GlobalStyle;

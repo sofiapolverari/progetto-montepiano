@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 import styled, { css } from "styled-components";
 import { FC } from "react";
 import {
@@ -8,10 +7,10 @@ import {
   MainColorPaletteType,
 } from "../../constants/colors";
 import { Container } from "../container/container";
+import { BannerText } from "../banner-text/banner-text";
+import React from "react";
 
-//TODO quando l'articolo è horizontal le animazioni dovrebbero entrare leggermente da sotto passando da opacità 0 a opacità 1
-
-interface ArticleProps {
+export interface ArticleProps {
   title: string;
   dateLabel?: string;
   imageUrl: string;
@@ -35,20 +34,6 @@ const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Title = styled.h1<{ color: MainColorPaletteType }>`
-  color: ${({ color }) => MainColorPalette[color]};
-  font-size: 60px;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 20px;
-  @media (min-width: 1280px) {
-    font-size: 80px; //dim responsive del testo
-  }
-  @media (min-width: 1536px) {
-    font-size: 100px;
-  }
 `;
 
 const DateLabel = styled.h2<{ color: MainColorPaletteType }>`
@@ -118,7 +103,7 @@ export const Article: FC<ArticleProps> = ({
               transition: { ease: "easeOut", duration: 0.4 },
             }}
           >
-            <Title color={color}> {title} </Title>
+            <BannerText color={color} title={title} />
             {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
           </motion.div>
         ) : (
@@ -130,7 +115,7 @@ export const Article: FC<ArticleProps> = ({
               transition: { ease: "easeOut", duration: 0.4 },
             }}
           >
-            <Title color={color}> {title} </Title>
+            <BannerText color={color} title={title} />
             {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
           </motion.div>
         )}

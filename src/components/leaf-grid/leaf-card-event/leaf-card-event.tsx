@@ -2,7 +2,10 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { LeafCard } from "./leaf-card/leaf-card";
 import { FC } from "react";
-import { MainColorPalette, MainColorPaletteType } from "../../../constants/colors";
+import {
+  MainColorPalette,
+  MainColorPaletteType,
+} from "../../../constants/colors";
 
 export interface LeafCardEventProps {
   date?: string;
