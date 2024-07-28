@@ -1,4 +1,4 @@
-import { ArticleProps } from "../../components/article/article";
+import { ArticleProps } from "../../components/blog-entry/blog-entry";
 
 export const mockGiorgio: ArticleProps = {
   color: "chestnut",

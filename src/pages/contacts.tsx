@@ -12,6 +12,7 @@ import {
   mockBannerText,
 } from "../fixture-for-pages/contacts";
 import GlobalStyle from "../globalStyles";
+import { Layout } from "../components/layout/layout";
 
 /* animazione linea= initial: { translateX: direction === "left" ? "-100%" : "100%" },
               whileInView: { translateX: "0%" },
@@ -20,23 +21,19 @@ import GlobalStyle from "../globalStyles";
 
 const ContactsPage: React.FC<PageProps> = () => {
   return (
-    <>
-      <GlobalStyle />
-      <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        <Header {...mockHeader} />
-        <BannerText {...mockBannerText} />
-        <ContactSection {...mockContactSectionConsiglio} />
-        <hr
-          style={{ width: "100%", height: "5px", backgroundColor: "#273e0a" }}
-        />
-        <ContactSection {...mockContactSectionInfo} />
-        <hr
-          style={{ width: "100%", height: "5px", backgroundColor: "#273e0a" }}
-        />
-        <ContactSection {...mockContactSectionMap} />
-        <Footer {...mockFooter} />
-      </div>
-    </>
+    <Layout {...{ ...mockFooter, ...mockHeader }}>
+      <Header {...mockHeader} />
+      <BannerText {...mockBannerText} />
+      <ContactSection {...mockContactSectionConsiglio} />
+      <hr
+        style={{ width: "100%", height: "5px", backgroundColor: "#273e0a" }}
+      />
+      <ContactSection {...mockContactSectionInfo} />
+      <hr
+        style={{ width: "100%", height: "5px", backgroundColor: "#273e0a" }}
+      />
+      <ContactSection {...mockContactSectionMap} />
+    </Layout>
   );
 };
 

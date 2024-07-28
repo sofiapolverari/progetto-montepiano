@@ -15,6 +15,15 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
+      resolve:"gatsby-source-contentful",
+      options: {
+        accessToken:"bhuui5YLcaFEcHQFTxd6EFQw7xNtd2jK9J_LMADxOzM",
+        spaceId:"7b3cqdtbyaw3",
+        environment: "master",
+        useNameForId: false,
+      }
+    },
+  {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",

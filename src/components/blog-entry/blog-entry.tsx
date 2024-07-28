@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import React from "react";
 import styled, { css } from "styled-components";
 import { FC } from "react";
 import {
@@ -7,14 +8,14 @@ import {
   MainColorPaletteType,
 } from "../../constants/colors";
 import { Container } from "../container/container";
-import { BannerText } from "../banner-text/banner-text";
-import React from "react";
+import { graphql } from "gatsby";
+import { getFormattedDate } from "../../utils/get-formatted-date";
+import { RichText } from "../rich-text/rich-text";
 
-export interface ArticleProps {
-  title: string;
-  dateLabel?: string;
-  imageUrl: string;
-  body: string;
+//TODO inserire un controllo che inserisce le varie parti del componente solo quanod ci sono i dati corrispettivi nel database
+//TODO quando l'articolo è horizontal le animazioni dovrebbero entrare leggermente da sotto passando da opacità 0 a opacità 1
+
+export interface BlogEntryProps extends Queries.ArticleDataFragment {
   color: MainColorPaletteType;
   direction: "vertical" | "horizontal";
 }
@@ -36,6 +37,20 @@ const ColumnWrapper = styled.div`
   align-items: center;
 `;
 
+const Title = styled.h1<{ color: MainColorPaletteType }>`
+  color: ${({ color }) => MainColorPalette[color]};
+  font-size: 60px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+  @media (min-width: 1280px) {
+    font-size: 80px; //dim responsive del testo
+  }
+  @media (min-width: 1536px) {
+    font-size: 100px;
+  }
+`;
+
 const DateLabel = styled.h2<{ color: MainColorPaletteType }>`
   text-align: center;
   width: 100%;
@@ -55,7 +70,7 @@ const DateLabel = styled.h2<{ color: MainColorPaletteType }>`
   //display: inline-block;
 `;
 
-const TextBox = styled.div<{ color: MainColorPaletteType }>`
+const TextBox = styled(RichText)<{ color: MainColorPaletteType }>`
   background-color: ${({ color }) => MainColorPalette[color]};
   color: #e9e5d9; //Alabaster
   padding: 15px;
@@ -76,21 +91,22 @@ const ImageAnimatedWrapper = styled(motion.div)`
   flex-basis: 30%;
 `;
 
-const Photo = styled.img<Pick<ArticleProps, "direction">>`
+const Photo = styled.img<Pick<BlogEntryProps, "direction">>`
   width: ${({ direction }) => (direction === "horizontal" ? "80%" : "100%")};
   min-width: ${({ direction }) =>
     direction === "horizontal" ? "auto" : "500px"};
 `;
 
-export const Article: FC<ArticleProps> = ({
+export const BlogEntry: FC<BlogEntryProps> = ({
   title,
-  dateLabel,
-  imageUrl,
+  date,
+  poster,
   body,
   color,
   direction,
   ...props
 }) => {
+  const formattedDate = date ? getFormattedDate(date) : null;
   return (
     <Root>
       <ColumnWrapper>
@@ -103,8 +119,8 @@ export const Article: FC<ArticleProps> = ({
               transition: { ease: "easeOut", duration: 0.4 },
             }}
           >
-            <BannerText color={color} title={title} />
-            {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
+            <Title color={color}> {title} </Title>
+            {formattedDate && <DateLabel color={color}>{formattedDate}</DateLabel>}
           </motion.div>
         ) : (
           <motion.div
@@ -115,12 +131,12 @@ export const Article: FC<ArticleProps> = ({
               transition: { ease: "easeOut", duration: 0.4 },
             }}
           >
-            <BannerText color={color} title={title} />
-            {dateLabel && <DateLabel color={color}>{dateLabel}</DateLabel>}
+            <Title color={color}> {title} </Title>
+            {formattedDate && <DateLabel color={color}>{formattedDate}</DateLabel>}
           </motion.div>
         )}
 
-        {direction === "horizontal" && (
+        {direction === "horizontal" && poster?.url && (
           <ImageAnimatedWrapper
             {...{
               initial: { opacity: 0 },
@@ -129,10 +145,10 @@ export const Article: FC<ArticleProps> = ({
               transition: { ease: "easeOut", duration: 0.4, delay: 0.5 },
             }}
           >
-            <Photo src={imageUrl} direction={direction} />
+            <Photo src={poster?.url} direction={direction} />
           </ImageAnimatedWrapper>
         )}
-        {direction === "horizontal" ? (
+        {body?.raw && (direction === "horizontal" ? (
           <motion.div
             {...{
               initial: { translateY: "+100%", opacity: 0 },
@@ -141,7 +157,7 @@ export const Article: FC<ArticleProps> = ({
               transition: { ease: "easeOut", duration: 0.4 },
             }}
           >
-            <TextBox color={color}> {body} </TextBox>
+            <TextBox color={color} raw={body.raw} />
           </motion.div>
         ) : (
           <motion.div
@@ -152,11 +168,11 @@ export const Article: FC<ArticleProps> = ({
               transition: { ease: "easeOut", duration: 0.4 },
             }}
           >
-            <TextBox color={color}> {body} </TextBox>
+            <TextBox color={color} raw={body.raw} />
           </motion.div>
-        )}
+        ))}
       </ColumnWrapper>
-      {direction === "vertical" && (
+      {direction === "vertical" && poster?.url && (
         <ImageAnimatedWrapper
           {...{
             initial: { translateX: "100%", opacity: 0 },
@@ -165,9 +181,22 @@ export const Article: FC<ArticleProps> = ({
             transition: { ease: "easeOut", duration: 0.4 },
           }}
         >
-          <Photo src={imageUrl} direction={direction} />
+          <Photo src={poster?.url} direction={direction} />
         </ImageAnimatedWrapper>
       )}
     </Root>
   );
 };
+
+export const query = graphql`
+  fragment ArticleData on ContentfulBlogEntry{
+    body {
+      raw
+    }
+    date
+    title
+    poster {
+      url
+    }
+  }
+`

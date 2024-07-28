@@ -8,21 +8,16 @@ import { mockHeader, mockFooter } from "../../fixture-for-pages/events";
 import { mockBannerText, mockLeafGrid } from "../../fixture-for-pages/events";
 import { Container } from "../../components/container/container";
 
-import GlobalStyle from "../../globalStyles";
+import { Layout } from "../../components/layout/layout";
 
 const EventsPage: React.FC<PageProps> = () => {
   return (
-    <>
-      <GlobalStyle />
-      <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        <Header {...mockHeader} />
-        <Container>
-          <BannerText {...mockBannerText} />
-          <LeafGrid {...mockLeafGrid} />
-        </Container>
-        <Footer {...mockFooter} />
-      </div>
-    </>
+    <Layout {...{ ...mockFooter, ...mockHeader }}>
+      <Container>
+        <BannerText {...mockBannerText} />
+        <LeafGrid {...mockLeafGrid} />
+      </Container>
+    </Layout>
   );
 };
 

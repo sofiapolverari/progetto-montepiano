@@ -22,12 +22,11 @@ import { BannerImage } from "../components/banner-image/banner-image";
 import { Footer } from "../components/layout/footer/footer";
 import { LeafButton } from "../components/leaf-button/leaf-button";
 import GlobalStyle from "../globalStyles";
+import { Layout } from "../components/layout/layout";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <>
-      <GlobalStyle />
-      <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+    <Layout {...{...mockFooter, ...mockHeader}}>
         <Header {...mockHeader} />
         <HeroBanner {...mockHeroBanner} />
         <AnimatedTitle label={eventTitle} color="chestnut" direction="left" />
@@ -76,9 +75,7 @@ const IndexPage: React.FC<PageProps> = () => {
           direction="right"
         />
         <BannerImage {...mockBannerImage} />
-        <Footer {...mockFooter} />
-      </div>
-    </>
+    </Layout>
   );
 };
 
