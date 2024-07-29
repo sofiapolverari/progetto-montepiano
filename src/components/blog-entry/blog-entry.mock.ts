@@ -2,7 +2,7 @@ import { mockImg } from "../../utils/mock-img";
 import { mockRichText } from "../../utils/mock-rich-text";
 import { BlogEntryProps } from "./blog-entry";
 
-export const blogEntryMock:BlogEntryProps = {
+export const mockBlogEntry:BlogEntryProps = {
     color: "pakistan-green",
     title: "Aperitivo Erbomagico",
     date: "2024-07-18T10:10",

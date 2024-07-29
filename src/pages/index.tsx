@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { HeadFC, PageProps } from "gatsby";
+import { graphql, type HeadFC, type PageProps } from "gatsby";
 import { Header } from "../components/layout/header/header";
 import {
   mockHeader,
@@ -27,7 +27,6 @@ import { Layout } from "../components/layout/layout";
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout {...{...mockFooter, ...mockHeader}}>
-        <Header {...mockHeader} />
         <HeroBanner {...mockHeroBanner} />
         <AnimatedTitle label={eventTitle} color="chestnut" direction="left" />
         <AnimatedWrapper direction="left">
@@ -81,4 +80,10 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>Home Page</title>;
+export const Head: HeadFC = () => <title>Proloco Montepiano</title>;
+
+// const query= graphql`
+//   query Home {
+
+//   }
+// `

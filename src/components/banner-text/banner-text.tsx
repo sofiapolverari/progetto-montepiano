@@ -9,10 +9,6 @@ export interface BannerTextProps {
   color: MainColorPaletteType;
 }
 
-const Root = styled(Container)`
-  padding-top: 120px;
-`;
-
 const Title = styled.h1<{ color: MainColorPaletteType }>`
   color: ${({ color }) => MainColorPalette[color]};
   font-size: 60px;
@@ -29,8 +25,8 @@ const Title = styled.h1<{ color: MainColorPaletteType }>`
 
 export const BannerText: FC<BannerTextProps> = ({ title, color, ...props }) => {
   return (
-    <Root>
+    <Container>
       <Title color={color}> {title} </Title>
-    </Root>
+    </Container>
   );
 };

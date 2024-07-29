@@ -10,7 +10,7 @@ export interface HeroBannerProps {
 const Root = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 90px);
   position: relative;
   overflow: hidden;
 `;
@@ -18,7 +18,7 @@ const Root = styled.div`
 const ColorMask = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 90px);
   background-color: #e9e5d9; //Alabaster
   opacity: 20%;
   z-index: 5;

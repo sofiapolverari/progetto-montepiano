@@ -15,7 +15,7 @@ import { RichText } from "../rich-text/rich-text";
 //TODO inserire un controllo che inserisce le varie parti del componente solo quanod ci sono i dati corrispettivi nel database
 //TODO quando l'articolo è horizontal le animazioni dovrebbero entrare leggermente da sotto passando da opacità 0 a opacità 1
 
-export interface BlogEntryProps extends Queries.ArticleDataFragment {
+export interface BlogEntryProps extends Queries.BlogEntryDataFragment {
   color: MainColorPaletteType;
   direction: "vertical" | "horizontal";
 }
@@ -108,7 +108,7 @@ export const BlogEntry: FC<BlogEntryProps> = ({
 }) => {
   const formattedDate = date ? getFormattedDate(date) : null;
   return (
-    <Root>
+    <Root {...props}>
       <ColumnWrapper>
         {direction === "horizontal" ? (
           <motion.div
@@ -189,7 +189,7 @@ export const BlogEntry: FC<BlogEntryProps> = ({
 };
 
 export const query = graphql`
-  fragment ArticleData on ContentfulBlogEntry{
+  fragment BlogEntryData on ContentfulBlogEntry{
     body {
       raw
     }

@@ -20,6 +20,7 @@ const Root = styled.div`
   padding-bottom: 50px;
   gap: 20px;
   flex-wrap: wrap;
+  row-gap: 60px;
 `;
 
 const StyledLeafCardEvent = styled(LeafCardEvent)<

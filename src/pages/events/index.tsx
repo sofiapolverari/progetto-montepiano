@@ -9,14 +9,20 @@ import { mockBannerText, mockLeafGrid } from "../../fixture-for-pages/events";
 import { Container } from "../../components/container/container";
 
 import { Layout } from "../../components/layout/layout";
+import styled from "styled-components";
+
+const StyledContainer = styled(Container)`
+  margin-top: 60px;
+  margin-bottom: 60px;
+`
 
 const EventsPage: React.FC<PageProps> = () => {
   return (
     <Layout {...{ ...mockFooter, ...mockHeader }}>
-      <Container>
+      <StyledContainer>
         <BannerText {...mockBannerText} />
         <LeafGrid {...mockLeafGrid} />
-      </Container>
+      </StyledContainer>
     </Layout>
   );
 };

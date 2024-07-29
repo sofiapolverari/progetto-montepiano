@@ -17,6 +17,7 @@ interface HeaderMainProps {
 
 const Root = styled.div<{ color: MainColorPaletteType }>`
   position: relative;
+  height: 90px;
   z-index: 10;
   display: flex;
   width: 100%;

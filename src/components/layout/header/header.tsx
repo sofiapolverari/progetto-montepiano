@@ -19,6 +19,11 @@ const Root = styled.div`
   z-index: 100;
 `;
 
+// Needed to insert header into page elements flow
+const Spacer = styled.div`
+  height: 90px;
+`;
+
 /*useEffect(effect:() => {
 
   const closeDropdown = e => {if (e.path[0].tagName !== 'BUTTON') {setIsOpen(value: false);
@@ -50,14 +55,17 @@ export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {
   window.addEventListener("click", handleClickOutsideDropdown);
 
   return (
-    <Root>
-      <HeaderMain
-        color={color}
-        linkUrl={linkUrl}
-        hamburgerButtonOnClick={HandleHamburgerButtonOnClick}
-        dropdownButtonRef={dropDownButtonRef}
-      />
-      <DropdownMenu color={color} isOpen={isOpen} ref={dropDowMenuRef} />
-    </Root>
+    <>
+      <Spacer />
+      <Root>
+        <HeaderMain
+          color={color}
+          linkUrl={linkUrl}
+          hamburgerButtonOnClick={HandleHamburgerButtonOnClick}
+          dropdownButtonRef={dropDownButtonRef}
+        />
+        <DropdownMenu color={color} isOpen={isOpen} ref={dropDowMenuRef} />
+      </Root>
+    </>
   );
 };

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { BlogEntry } from "./blog-entry";
-import { blogEntryMock } from "./blog-entry.mock";
+import { mockBlogEntry } from "./blog-entry.mock";
 
 //TODO portare tutto in fixture, non voglio vedere nessuna costante duplicata
 
@@ -25,31 +25,31 @@ type Story = StoryObj<typeof BlogEntry>;
 
 export const Default: Story = {
   args: {
-    ...blogEntryMock
+    ...mockBlogEntry
   },
 };
 export const FieldDrab: Story = {
   args: {
-    ...blogEntryMock,
+    ...mockBlogEntry,
     color: "field-drab",
   },
 };
 export const Chestnut: Story = {
   args: {
-    ...blogEntryMock,
+    ...mockBlogEntry,
     color: "chestnut",
   },
 };
 export const BrunswickGreen: Story = {
   args: {
-    ...blogEntryMock,
+    ...mockBlogEntry,
     color: "brunswick-green",
   },
 };
 
 export const Vertical: Story = {
   args: {
-    ...blogEntryMock,
+    ...mockBlogEntry,
     direction: "vertical",
   },
 };
