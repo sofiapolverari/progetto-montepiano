@@ -13,7 +13,7 @@ interface DropdownMenuButtonProps {
 
 const Root = styled.a<{ color: MainColorPaletteType }>`
   display: flex;
-  height: 40px;
+  height: 70px;
   justify-content: center;
   align-items: center;
   font-size: 20px;
@@ -26,6 +26,7 @@ const Root = styled.a<{ color: MainColorPaletteType }>`
   padding-bottom: 10px;
   transition: all 0.3s ease-out;
   text-align: center;
+  font-weight: 500;
 
   &:hover {
     color: #273e0a;

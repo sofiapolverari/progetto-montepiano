@@ -26,8 +26,8 @@ const Root = styled(Container)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  gap: 25px;
+  //justify-content: space-around;
+  gap: 70px;
 `;
 
 const ColumnWrapper = styled.div`
@@ -119,7 +119,9 @@ export const BlogEntry: FC<BlogEntryProps> = ({
             }}
           >
             <Title color={color}> {title} </Title>
-            {formattedDate && <DateLabel color={color}>{formattedDate}</DateLabel>}
+            {formattedDate && (
+              <DateLabel color={color}>{formattedDate}</DateLabel>
+            )}
           </motion.div>
         ) : (
           <motion.div
@@ -131,7 +133,9 @@ export const BlogEntry: FC<BlogEntryProps> = ({
             }}
           >
             <Title color={color}> {title} </Title>
-            {formattedDate && <DateLabel color={color}>{formattedDate}</DateLabel>}
+            {formattedDate && (
+              <DateLabel color={color}>{formattedDate}</DateLabel>
+            )}
           </motion.div>
         )}
 
@@ -147,29 +151,30 @@ export const BlogEntry: FC<BlogEntryProps> = ({
             <Photo src={poster?.url} direction={direction} />
           </ImageAnimatedWrapper>
         )}
-        {body?.raw && (direction === "horizontal" ? (
-          <motion.div
-            {...{
-              initial: { translateY: "+100%", opacity: 0 },
-              whileInView: { translateY: "0%", opacity: 1 },
-              viewport: { once: true },
-              transition: { ease: "easeOut", duration: 0.4 },
-            }}
-          >
-            <TextBox color={color} raw={body.raw} />
-          </motion.div>
-        ) : (
-          <motion.div
-            {...{
-              initial: { translateX: "-100%", opacity: 0 },
-              whileInView: { translateX: "0%", opacity: 1 },
-              viewport: { once: true },
-              transition: { ease: "easeOut", duration: 0.4 },
-            }}
-          >
-            <TextBox color={color} raw={body.raw} />
-          </motion.div>
-        ))}
+        {body?.raw &&
+          (direction === "horizontal" ? (
+            <motion.div
+              {...{
+                initial: { translateY: "+100%", opacity: 0 },
+                whileInView: { translateY: "0%", opacity: 1 },
+                viewport: { once: true },
+                transition: { ease: "easeOut", duration: 0.4 },
+              }}
+            >
+              <TextBox color={color} raw={body.raw} />
+            </motion.div>
+          ) : (
+            <motion.div
+              {...{
+                initial: { translateX: "-100%", opacity: 0 },
+                whileInView: { translateX: "0%", opacity: 1 },
+                viewport: { once: true },
+                transition: { ease: "easeOut", duration: 0.4 },
+              }}
+            >
+              <TextBox color={color} raw={body.raw} />
+            </motion.div>
+          ))}
       </ColumnWrapper>
       {direction === "vertical" && poster?.url && (
         <ImageAnimatedWrapper
@@ -188,7 +193,7 @@ export const BlogEntry: FC<BlogEntryProps> = ({
 };
 
 export const query = graphql`
-  fragment BlogEntryData on ContentfulBlogEntry{
+  fragment BlogEntryData on ContentfulBlogEntry {
     body {
       raw
     }
@@ -199,4 +204,4 @@ export const query = graphql`
     }
     direction
   }
-`
+`;

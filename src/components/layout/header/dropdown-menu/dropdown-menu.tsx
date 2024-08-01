@@ -14,7 +14,7 @@ interface DropdownMenuProps extends Pick<Queries.LayoutDataFragment, "sections">
 }
 
 const Root = styled.div<{ color: MainColorPaletteType }>`
-  width: 250px;
+  width: 270px;
   padding: 20px 0px;
   display: flex;
   flex-direction: column;
