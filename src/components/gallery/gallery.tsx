@@ -50,7 +50,7 @@ export const Gallery: FC<GalleryProps> = ({ items: items, ...props }) => {
   return (
     <Root>
       <GalleryGrid>
-        <GalleryItem imageUrl={items.imageUrl} />
+        { items.map((item) => <GalleryItem imageUrl={item.imageUrl} />)}
       </GalleryGrid>
     </Root>
   );
