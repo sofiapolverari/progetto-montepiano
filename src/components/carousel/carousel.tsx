@@ -6,9 +6,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CAROUSEL_HEIGHT } from "./constants";
 import { getPositiveModulo } from "../../utils/get-positive-modulo";
 import { FC } from "react";
+import { graphql } from "gatsby";
 
 export interface CarouselProps {
-  items: Pick<CarouselItemProps, "linkUrl" | "imageUrl">[];
+  items: readonly Queries.SponsorDataFragment[];
 }
 
 const Root = styled.div`
@@ -71,8 +72,8 @@ export const Carousel: FC<CarouselProps> = ({ items: _items, ...props }) => {
                 transition={{ ease: "easeOut", duration: 0.4 }}
               >
                 <CarouselItem
-                  imageUrl={item.imageUrl}
-                  linkUrl={item.linkUrl}
+                  imageUrl={item.image?.url!}
+                  linkUrl={item.url!}
                   $isCenter={position === "center"}
                 />
               </ItemAnimation>
@@ -87,3 +88,12 @@ export const Carousel: FC<CarouselProps> = ({ items: _items, ...props }) => {
 // spazio tra i caroselli no gap al babbo, ma ai singoli item
 // spazio tra gli elementi sopra e sotto togliere padding dal root del footer e metterli singolarmente a tutti tranne al carosello
 //storybook che sborda da tutto schermo
+
+export const query = graphql`
+  fragment SponsorData on ContentfulSponsor {
+    url
+    image {
+      url
+    }
+  }
+`;

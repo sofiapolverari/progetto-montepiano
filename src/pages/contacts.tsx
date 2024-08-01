@@ -1,10 +1,7 @@
 import * as React from "react";
-import type { HeadFC, PageProps } from "gatsby";
-import { Header } from "../components/layout/header/header";
-import { Footer } from "../components/layout/footer/footer";
+import { graphql, type HeadFC, type PageProps } from "gatsby";
 import { ContactSection } from "../components/contacts-section/contact-section";
 import { BannerText } from "../components/banner-text/banner-text";
-import { mockHeader, mockFooter } from "../fixture-for-pages/homepage";
 import {
   mockContactSectionConsiglio,
   mockContactSectionInfo,
@@ -19,20 +16,29 @@ import { Layout } from "../components/layout/layout";
               viewport: { once: true },
               transition: { duration: 0.9, ease: "easeOut" },  */
 
-const ContactsPage: React.FC<PageProps> = () => {
+const ContactsPage: React.FC<PageProps<Queries.ContactsQuery>> = ({
+  data: { allContentfulContact, contentfulLayout },
+}) => {
   return (
-    <Layout {...{ ...mockFooter, ...mockHeader }}>
-      <Header {...mockHeader} />
+    <Layout color="pakistan-green" {...contentfulLayout!}>
       <BannerText {...mockBannerText} />
-      <ContactSection {...mockContactSectionConsiglio} />
-      <hr
-        style={{ width: "100%", height: "5px", backgroundColor: "#273e0a" }}
-      />
-      <ContactSection {...mockContactSectionInfo} />
-      <hr
-        style={{ width: "100%", height: "5px", backgroundColor: "#273e0a" }}
-      />
-      <ContactSection {...mockContactSectionMap} />
+      {allContentfulContact.nodes.map((contact, i) => (
+        <>
+          {
+            // Only put separation line between contacts
+            i && (
+              <hr
+                style={{
+                  width: "100%",
+                  height: "5px",
+                  backgroundColor: "#273e0a",
+                }}
+              />
+            )
+          }
+          <ContactSection {...mockContactSectionConsiglio} />
+        </>
+      ))}
     </Layout>
   );
 };
@@ -40,3 +46,16 @@ const ContactsPage: React.FC<PageProps> = () => {
 export default ContactsPage;
 
 export const Head: HeadFC = () => <title>Contacts</title>;
+
+export const query = graphql`
+  query Contacts {
+    allContentfulContact {
+      nodes {
+        ...ContactData
+      }
+    }
+    contentfulLayout {
+      ...LayoutData
+    }
+  }
+`;

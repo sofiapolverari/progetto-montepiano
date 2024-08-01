@@ -1,10 +1,14 @@
 import React, { FC, PropsWithChildren } from "react";
-import { Footer, FooterProps } from "./footer/footer";
-import { Header, HeaderProps } from "./header/header";
+import { Footer } from "./footer/footer";
+import { Header } from "./header/header";
 import styled from "styled-components";
 import GlobalStyle from "../../globalStyles";
+import { graphql } from "gatsby";
+import { MainColorPaletteType } from "../../constants/colors";
 
-interface LayoutProps extends FooterProps, HeaderProps {}
+interface LayoutProps extends Queries.LayoutDataFragment {
+  color: MainColorPaletteType;
+}
 
 const BodyWrapper = styled.div`
   width: 100%;
@@ -26,3 +30,15 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
     </BodyWrapper>
   </>
 );
+
+export const query = graphql`
+  fragment LayoutData on ContentfulLayout{
+    facebookUrl
+    instagramUrl
+    whatsappUrl
+    sections {
+      slug
+      title
+    }
+  }
+`

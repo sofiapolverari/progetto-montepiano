@@ -8,10 +8,9 @@ import {
 } from "../../../../constants/colors";
 import { FC } from "react";
 
-interface HeaderMainProps {
+interface HeaderMainProps extends Pick<Queries.LayoutDataFragment, "facebookUrl" | "instagramUrl"| "whatsappUrl">{
   color: MainColorPaletteType;
   hamburgerButtonOnClick?: () => void;
-  linkUrl: string[];
   dropdownButtonRef: ForwardedRef<HTMLDivElement>;
 }
 
@@ -37,8 +36,10 @@ const SocialWrapper = styled.div`
 export const HeaderMain: FC<HeaderMainProps> = ({
   color,
   hamburgerButtonOnClick,
-  linkUrl,
   dropdownButtonRef,
+  facebookUrl,
+  instagramUrl,
+  whatsappUrl,
   ...props
 }) => {
   return (
@@ -49,14 +50,14 @@ export const HeaderMain: FC<HeaderMainProps> = ({
         ref={dropdownButtonRef}
       />
       <SocialWrapper>
-        {linkUrl?.[0] && (
-          <SocialButton linkUrl={linkUrl[0]} icon={"facebook"} />
+        {facebookUrl && (
+          <SocialButton linkUrl={facebookUrl} icon={"facebook"} />
         )}
-        {linkUrl?.[1] && (
-          <SocialButton linkUrl={linkUrl[1]} icon={"instagram"} />
+        {instagramUrl && (
+          <SocialButton linkUrl={instagramUrl} icon={"instagram"} />
         )}
-        {linkUrl?.[2] && (
-          <SocialButton linkUrl={linkUrl[2]} icon={"whatsapp"} />
+        {whatsappUrl && (
+          <SocialButton linkUrl={whatsappUrl} icon={"whatsapp"} />
         )}
       </SocialWrapper>
     </Root>

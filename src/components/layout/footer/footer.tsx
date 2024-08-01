@@ -8,12 +8,15 @@ import {
   MainColorPaletteType,
 } from "../../../constants/colors";
 import { FC } from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { RichText } from "../../rich-text/rich-text";
 
-export interface FooterProps {
+export interface FooterProps
+  extends Pick<
+    Queries.LayoutDataFragment,
+    "facebookUrl" | "instagramUrl" | "whatsappUrl"
+  > {
   color: MainColorPaletteType;
-  linkUrl: string[];
-  body: string[];
-  carouselItems: CarouselProps["items"];
 }
 
 const Root = styled.div<{ color: MainColorPaletteType }>`
@@ -53,13 +56,7 @@ const SocialWrapper = styled.div`
   padding-right: 20px;
 `;
 
-const CarouselBox = styled.div`
-  height: ${CAROUSEL_HEIGHT};
-  margin-left: 20px;
-  margin-right: 20px;
-`;
-
-const TextBox = styled.div`
+const TextBox = styled(RichText)`
   color: #e9e5d9; //Alabaster
   padding-top: 25px;
   padding-bottom: 25px;
@@ -75,35 +72,50 @@ const TextBox = styled.div`
 
 export const Footer: FC<FooterProps> = ({
   color,
-  linkUrl,
-  body,
-  carouselItems,
+  facebookUrl,
+  instagramUrl,
+  whatsappUrl,
   ...props
-}) => (
-  <Root color={color}>
-    <TopWrapper>
-      <LogoWrapper>
-        <Logo src="/logo_montepiano_alabaster_logotype.png" />
-      </LogoWrapper>
-      <SocialWrapper>
-        {linkUrl?.[0] && (
-          <SocialButton linkUrl={linkUrl[0]} icon={"facebook"} />
-        )}
-        {linkUrl?.[1] && (
-          <SocialButton linkUrl={linkUrl[1]} icon={"instagram"} />
-        )}
-        {linkUrl?.[2] && (
-          <SocialButton linkUrl={linkUrl[2]} icon={"whatsapp"} />
-        )}
-      </SocialWrapper>
-    </TopWrapper>
-    <Carousel items={carouselItems} />
-    <TextBox>
-      {body.map((paragraph) => (
-        <div>{paragraph}</div>
-      ))}
-    </TextBox>
-  </Root>
-);
+}) => {
+  //TODO - ALBERTO rich text non funziona controllare
+  const { allContentfulSponsor, contentfulRichTextLabel } =
+    useStaticQuery<Queries.Query>(graphql`
+      query {
+        contentfulRichTextLabel(contentfulid: { eq: "footer-label" }) {
+          label {
+            raw
+          }
+        }
+        allContentfulSponsor {
+          nodes {
+            ...SponsorData
+          }
+        }
+      }
+    `);
+
+  return (
+    <Root color={color}>
+      <TopWrapper>
+        <LogoWrapper>
+          <Logo src="/logo_montepiano_alabaster_logotype.png" />
+        </LogoWrapper>
+        <SocialWrapper>
+          {facebookUrl && (
+            <SocialButton linkUrl={facebookUrl} icon={"facebook"} />
+          )}
+          {instagramUrl && (
+            <SocialButton linkUrl={instagramUrl} icon={"instagram"} />
+          )}
+          {whatsappUrl && (
+            <SocialButton linkUrl={whatsappUrl} icon={"whatsapp"} />
+          )}
+        </SocialWrapper>
+      </TopWrapper>
+      <Carousel items={allContentfulSponsor.nodes} />
+      {contentfulRichTextLabel?.label?.raw && <TextBox raw={contentfulRichTextLabel?.label?.raw}/>}
+    </Root>
+  );
+};
 
 // TODO MANDARE A CAPO IL TESTO, CREARE CARTELLINA PER I SOCIAL, ALLINEARE LA TESTA

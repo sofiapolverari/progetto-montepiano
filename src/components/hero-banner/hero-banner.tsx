@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export interface HeroBannerProps {
   color: "alabaster" | "pakistan-green";
+  imageSrc?: string | null;
 }
 
 const Root = styled.div`
@@ -72,11 +73,11 @@ const ArrowAnimation = styled(motion.div)`
   width: 100%;
 `;
 
-export const HeroBanner: FC<HeroBannerProps> = ({ color, ...props }) => {
+export const HeroBanner: FC<HeroBannerProps> = ({ color, imageSrc, ...props }) => {
   return (
     <Root>
       <ColorMask />
-      <Photo src="/photo-hero.jpg" />
+      {imageSrc && <Photo src={imageSrc} />}
       <AnimatePresence mode={"popLayout"}>
         <LogoAnimation
           initial={{ translateY: "-100%" }}

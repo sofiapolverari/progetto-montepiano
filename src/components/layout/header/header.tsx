@@ -2,15 +2,11 @@ import React, { useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { HeaderMain } from "./header-main/header-main";
 import { DropdownMenu } from "./dropdown-menu/dropdown-menu";
-import {
-  MainColorPalette,
-  MainColorPaletteType,
-} from "../../../constants/colors";
+import { MainColorPaletteType } from "../../../constants/colors";
 import { FC } from "react";
 
-export interface HeaderProps {
+export interface HeaderProps extends Queries.LayoutDataFragment {
   color: MainColorPaletteType;
-  linkUrl: string[]; //TODO commentare
 }
 
 const Root = styled.div`
@@ -24,19 +20,14 @@ const Spacer = styled.div`
   height: 90px;
 `;
 
-/*useEffect(effect:() => {
-
-  const closeDropdown = e => {if (e.path[0].tagName !== 'BUTTON') {setIsOpen(value: false);
-  }
-};
-
-document.body.addEventListener(type: 'click', closeDropdown);
-
-return () => document.body.addEventListener(type: 'click', closeDropdown);
-
-}, deps:[]);*/
-
-export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {
+export const Header: FC<HeaderProps> = ({
+  color,
+  facebookUrl,
+  instagramUrl,
+  whatsappUrl,
+  sections,
+  ...props
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const HandleHamburgerButtonOnClick = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -60,11 +51,15 @@ export const Header: FC<HeaderProps> = ({ color, linkUrl, ...props }) => {
       <Root>
         <HeaderMain
           color={color}
-          linkUrl={linkUrl}
           hamburgerButtonOnClick={HandleHamburgerButtonOnClick}
           dropdownButtonRef={dropDownButtonRef}
+          {...{
+            facebookUrl,
+            whatsappUrl,
+            instagramUrl,
+          }}
         />
-        <DropdownMenu color={color} isOpen={isOpen} ref={dropDowMenuRef} />
+        <DropdownMenu color={color} isOpen={isOpen} ref={dropDowMenuRef} sections={sections} />
       </Root>
     </>
   );

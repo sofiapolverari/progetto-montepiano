@@ -6,8 +6,8 @@ import {
 } from "../../../../../constants/colors";
 
 interface DropdownMenuButtonProps {
-  label?: string;
-  linkUrl: string;
+  label: string | null;
+  linkUrl: string | null;
   color: MainColorPaletteType;
 }
 
@@ -43,8 +43,11 @@ export const DropdownMenuButton = ({
   ...props
 }: DropdownMenuButtonProps) => {
   return (
-    <Root color={color} href={linkUrl}>
-      {label}
-    </Root>
+    label &&
+    linkUrl && (
+      <Root color={color} href={linkUrl}>
+        {label}
+      </Root>
+    )
   );
 };

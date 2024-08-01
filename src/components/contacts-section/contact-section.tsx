@@ -5,12 +5,10 @@ import { Container } from "../container/container";
 import { ReactComponent as Consiglio } from "./contacts-icon/consiglio.svg";
 import { ReactComponent as Posizione } from "./contacts-icon/posizione.svg";
 import { ReactComponent as Telefono } from "./contacts-icon/telefono.svg";
+import { graphql } from "gatsby";
+import { RichText } from "../rich-text/rich-text";
 
-export interface ContactSectionProps {
-  title: string;
-  body: string;
-  icon: "consiglio" | "posizione" | "telefono";
-}
+export interface ContactSectionProps extends Queries.ContactDataFragment {}
 
 const Root = styled(Container)`
   display: flex;
@@ -34,15 +32,14 @@ const Title = styled.div`
   padding-left: 15px;
 `;
 
-const InfoBox = styled.div`
-  margin-right: 40px;
-  flex-shrink: 0;
-`;
+const InfoBox = styled.div``;
 
-const Body = styled.div`
+const Body = styled(RichText)`
   color: #273e0a; //pakistan-green
   font-size: 17px;
   margin-bottom: 60px;
+  margin-right: 40px;
+  flex-shrink: 0;
 
   & h6 {
     font-size: 30px;
@@ -80,20 +77,17 @@ export const ContactSection: FC<ContactSectionProps> = ({
         {contactIcon}
         <Title>{title}</Title>
       </LeftBlock>
-      <InfoBox>
-        <Body>
-          <h6>Lorem ipsum dolor</h6>
-          <p>
-            <b>sit amet:</b>consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt
-          </p>
-          <h6>Lorem ipsum dolor</h6>
-          <p>
-            <b>sit amet:</b>consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt
-          </p>
-        </Body>
-      </InfoBox>
+      {body?.raw && <Body raw={body.raw} />}
     </Root>
   );
 };
+
+export const query = graphql`
+  fragment ContactData on ContentfulContact {
+    body {
+      raw
+    }
+    title
+    icon
+  }
+`;

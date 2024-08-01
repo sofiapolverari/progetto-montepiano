@@ -17,7 +17,6 @@ import { RichText } from "../rich-text/rich-text";
 
 export interface BlogEntryProps extends Queries.BlogEntryDataFragment {
   color: MainColorPaletteType;
-  direction: "vertical" | "horizontal";
 }
 
 // TODO frecce per switchare tra gli eventi per sfogliarli senza tornare alla pagina principale?
@@ -198,5 +197,6 @@ export const query = graphql`
     poster {
       url
     }
+    direction
   }
 `

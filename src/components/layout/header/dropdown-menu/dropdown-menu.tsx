@@ -2,18 +2,15 @@ import React, { forwardRef } from "react";
 import styled, { css } from "styled-components";
 import { DropdownMenuButton } from "./dropdown-menu-button/dropdown-menu-button";
 import { AnimatePresence, motion } from "framer-motion";
-import pagesList from "../../../../page-list.json";
 import {
   MainColorPalette,
   MainColorPaletteType,
 } from "../../../../constants/colors";
 import { FC } from "react";
 
-interface DropdownMenuProps {
+interface DropdownMenuProps extends Pick<Queries.LayoutDataFragment, "sections"> {
   color: MainColorPaletteType;
   isOpen: boolean;
-
-  // TODO forse inseriremo le pagine che ci vanno
 }
 
 const Root = styled.div<{ color: MainColorPaletteType }>`
@@ -26,7 +23,7 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
 `;
 
 export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
-  ({ color, isOpen, ...props }, ref) => {
+  ({ color, isOpen, sections, ...props }, ref) => {
     return (
       <AnimatePresence mode={"popLayout"}>
         {isOpen && (
@@ -37,10 +34,10 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
             transition={{ ease: "easeOut", duration: 0.4 }}
           >
             <Root color={color} ref={ref}>
-              {pagesList.map((page) => (
-                <DropdownMenuButton
-                  linkUrl={page.url}
-                  label={page.label}
+              {sections?.map((page) => (
+                page && <DropdownMenuButton
+                  linkUrl={page.slug}
+                  label={page.title}
                   color={color}
                 />
               ))}

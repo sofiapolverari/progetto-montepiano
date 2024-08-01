@@ -4,13 +4,13 @@ import { FC } from "react";
 import {
   MainColorPalette,
   MainColorPaletteType,
-} from "../../../../constants/colors";
+} from "../../../constants/colors";
 
 interface LeafCardProps {
   // size?: "small" | "medium" | "large"; TODO
   label?: string;
   linkUrl: string;
-  imageUrl: string;
+  imageUrl?: string | null;
   color: MainColorPaletteType;
 }
 const Label = styled.div`
@@ -116,7 +116,7 @@ export const LeafCard: FC<LeafCardProps> = ({
   return (
     <a href={linkUrl}>
       <Root>
-        <Photo src={imageUrl} /> <Mask color={color} />
+        <Photo src={imageUrl ?? ""} /> <Mask color={color} />
         <Label> {label} </Label>
       </Root>
     </a>
