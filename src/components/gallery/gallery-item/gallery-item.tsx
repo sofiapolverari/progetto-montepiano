@@ -7,6 +7,7 @@ export interface GalleryItemProps {
 }
 
 const Root = styled.img`
+  z-index: 100;
   object-fit: cover;
   width: 100%;
   height: 100%;
@@ -16,6 +17,7 @@ const Root = styled.img`
   position: relative;
   box-shadow: 0 0 0 #0000;
   opacity: 0.67;
+  background-color: red;
   filter: sepia(80%) hue-rotate(180deg);
 
   &:first-child {
@@ -51,7 +53,7 @@ const Root = styled.img`
 
   &:hover {
     opacity: 1;
-    z-index: 1;
+    z-index: 100;
     box-shadow: 1em 1em 1em #0004;
     transition: all $time ease(downhill);
     filter: sepia(0%) hue-rotate(0deg);

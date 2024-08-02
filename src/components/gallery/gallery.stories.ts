@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Gallery } from "./gallery";
-import { GalleryItems } from "./gallery-item";
+import { galleryItems } from "./gallery.fixture";
 
 const meta: Meta<typeof Gallery> = {
   title: "Components/Gallery",
@@ -18,6 +18,6 @@ type Story = StoryObj<typeof Gallery>;
 
 export const Default: Story = {
   args: {
-    items: GalleryItems,
+    items: galleryItems,
   },
 };

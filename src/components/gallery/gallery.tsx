@@ -17,7 +17,6 @@ const Root = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #bdd8f1;
 `;
 
 const GalleryGrid = styled.div`
@@ -25,7 +24,7 @@ const GalleryGrid = styled.div`
   grid-template-rows: repeat(5, 18vh);
   grid-template-columns: repeat(2, 45vw);
   transition: all ${time} ease(gravity);
-  background-color: #82a6cb;
+  background-color: #273e0a;
   border-radius: 10px;
   padding: 0.25em;
   cursor: zoom-in;
@@ -50,7 +49,9 @@ export const Gallery: FC<GalleryProps> = ({ items: items, ...props }) => {
   return (
     <Root>
       <GalleryGrid>
-        { items.map((item) => <GalleryItem imageUrl={item.imageUrl} />)}
+        {items?.map((item) => (
+          <GalleryItem imageUrl={item.imageUrl} />
+        ))}
       </GalleryGrid>
     </Root>
   );
