@@ -24,6 +24,7 @@ export interface LeafButtonProps {
    * Optional click handler
    */
   onClick?: () => void;
+  href?: string;
 }
 
 /**
@@ -59,6 +60,12 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
 /**
  * Primary UI component for user interaction
  */
-export const LeafButton: FC<LeafButtonProps> = ({ color, label, ...props }) => {
-  return <Root color={color}>{label}</Root>;
+export const LeafButton: FC<LeafButtonProps> = ({
+  color,
+  label,
+  href,
+  ...props
+}) => {
+  const button = <Root color={color}>{label}</Root>;
+  return href ? <a href={href}>{button}</a> : button;
 };

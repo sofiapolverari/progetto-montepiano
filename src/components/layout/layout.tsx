@@ -40,5 +40,6 @@ export const query = graphql`
       slug
       title
     }
+    specialPages
   }
 `

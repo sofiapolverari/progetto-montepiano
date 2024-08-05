@@ -11,6 +11,7 @@ import { Container } from "../container/container";
 import { graphql } from "gatsby";
 import { getFormattedDate } from "../../utils/get-formatted-date";
 import { RichText } from "../rich-text/rich-text";
+import { Gallery } from "../gallery/gallery";
 
 //TODO inserire un controllo che inserisce le varie parti del componente solo quanod ci sono i dati corrispettivi nel database
 //TODO quando l'articolo è horizontal le animazioni dovrebbero entrare leggermente da sotto passando da opacità 0 a opacità 1
@@ -26,7 +27,6 @@ const Root = styled(Container)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  //justify-content: space-around;
   gap: 70px;
 `;
 
@@ -103,11 +103,13 @@ export const BlogEntry: FC<BlogEntryProps> = ({
   body,
   color,
   direction,
+  images,
   ...props
 }) => {
   const formattedDate = date ? getFormattedDate(date) : null;
   return (
-    <Root {...props}>
+    <div {...props} style={{ display: "flex", flexDirection:"column", gap:"70px"}}>
+    <Root >
       <ColumnWrapper>
         {direction === "horizontal" ? (
           <motion.div
@@ -189,6 +191,8 @@ export const BlogEntry: FC<BlogEntryProps> = ({
         </ImageAnimatedWrapper>
       )}
     </Root>
+    <Gallery items={images?.map((img) => img?.url).filter(Boolean) as string[]} />
+    </div>
   );
 };
 
@@ -203,5 +207,8 @@ export const query = graphql`
       url
     }
     direction
+    images{
+      url
+    }
   }
 `;

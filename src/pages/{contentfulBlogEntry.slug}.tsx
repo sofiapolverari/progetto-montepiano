@@ -1,11 +1,6 @@
 import * as React from "react";
-import { graphql, type HeadFC, type PageProps } from "gatsby";
-import { Header } from "../components/layout/header/header";
-import { Footer } from "../components/layout/footer/footer";
+import { graphql, HeadProps, type PageProps } from "gatsby";
 import { BlogEntry } from "../components/blog-entry/blog-entry";
-import { mockHeader, mockFooter } from "../fixture-for-pages/events";
-import { mockGiorgio } from "../fixture-for-pages/events";
-import GlobalStyle from "../globalStyles";
 import { Layout } from "../components/layout/layout";
 import styled from "styled-components";
 import { MainColorPaletteType } from "../constants/colors";
@@ -18,14 +13,12 @@ const StyledBlogEntry = styled(BlogEntry)`
 const BlogEntryPage: React.FC<PageProps<Queries.BlogEntryQuery>> = ({
   data: { contentfulBlogEntry, contentfulLayout },
 }) => {
+  const color = contentfulBlogEntry?.section?.color as MainColorPaletteType;
   return (
-    <Layout {...contentfulLayout!} color="brunswick-green">
+    <Layout {...contentfulLayout!} color={color}>
       <StyledBlogEntry
-        color={
-          (contentfulBlogEntry?.section?.color as MainColorPaletteType) ??
-          "pakistan-green"
-        }
         {...(contentfulBlogEntry as Queries.BlogEntryDataFragment)}
+        color={color}
       />
     </Layout>
   );
@@ -34,7 +27,9 @@ const BlogEntryPage: React.FC<PageProps<Queries.BlogEntryQuery>> = ({
 export default BlogEntryPage;
 
 //TODO ALBERTO FIXARE IL SEO
-export const Head: HeadFC = () => <title>Giorgio</title>;
+export const Head: React.FC<HeadProps<Queries.BlogEntryQuery>> = ({
+  data: { contentfulBlogEntry },
+}) => <title>Montepiano | {contentfulBlogEntry?.title}</title>;
 
 export const query = graphql`
   query BlogEntry($id: String) {

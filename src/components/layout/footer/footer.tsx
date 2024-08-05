@@ -112,7 +112,7 @@ export const Footer: FC<FooterProps> = ({
           )}
         </SocialWrapper>
       </TopWrapper>
-      <Carousel items={allContentfulSponsor.nodes} />
+      {/* <Carousel items={allContentfulSponsor.nodes} /> */}
       {contentfulRichTextLabel?.label?.raw && <TextBox raw={contentfulRichTextLabel?.label?.raw}/>}
     </Root>
   );

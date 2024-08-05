@@ -1,5 +1,9 @@
 import type { GatsbyConfig } from "gatsby";
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`
+})
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `proloco montepiano`,
@@ -15,15 +19,17 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
-      resolve:"gatsby-source-contentful",
+      resolve: "gatsby-source-contentful",
       options: {
-        accessToken:"bhuui5YLcaFEcHQFTxd6EFQw7xNtd2jK9J_LMADxOzM",
-        spaceId:"7b3cqdtbyaw3",
+        accessToken:
+          process.env.CONTENTFUL_ACCESS_TOKEN,
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
         environment: "master",
         useNameForId: false,
-      }
+        host: process.env.CONTENTFUL_HOST ?? undefined,
+      },
     },
-  {
+    {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",

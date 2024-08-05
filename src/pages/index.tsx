@@ -1,13 +1,5 @@
 import * as React from "react";
 import { graphql, type HeadFC, type PageProps } from "gatsby";
-import { Header } from "../components/layout/header/header";
-import {
-  eventTitle,
-  discoverTitle,
-  chaletTitle,
-  mockBannerImage,
-  mockLeafButton,
-} from "../fixture-for-pages/homepage";
 import { HeroBanner } from "../components/hero-banner/hero-banner";
 import { AnimatedTitle } from "../components/animated-title/animated-title";
 import { AnimatedWrapper } from "../components/animated-wrapper/animated-wrapper";
@@ -19,14 +11,22 @@ import { Layout } from "../components/layout/layout";
 //TODO metti le scatoline dove devono stare
 
 const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
-  data: { contentfulHomepage, contentfulLayout },
+  data: { contentfulHomepage, contentfulLayout, allContentfulLabel },
 }) => {
+  const labels: Record<string, string> = allContentfulLabel.nodes.reduce<Record<string, string>>(
+    (acc, item) => ({ ...acc, [item.contentfulid ?? ""]: item.label ?? "" }), {}
+  );
   if (!contentfulHomepage) return null;
-  const { heroImage, highlightedArticles, indexPages, chaletImage } = contentfulHomepage;
+  const { heroImage, highlightedArticles, indexPages, chaletImage } =
+    contentfulHomepage;
   return (
     <Layout color="pakistan-green" {...contentfulLayout!}>
       <HeroBanner color="pakistan-green" imageSrc={heroImage?.url} />
-      <AnimatedTitle label={eventTitle} color="chestnut" direction="left" />
+      <AnimatedTitle
+        label={labels["homepage-highligted-events-title"] ?? ""}
+        color="chestnut"
+        direction="left"
+      />
       <AnimatedWrapper direction="left">
         <div
           style={{
@@ -38,13 +38,11 @@ const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
           }}
         >
           <LeafGrid
-            items={
-              highlightedArticles as Queries.BlogEntryCardDataFragment[]
-            }
+            items={highlightedArticles as Queries.BlogEntryCardDataFragment[]}
             color="chestnut"
             itemSize="small"
           />
-          <LeafButton {...mockLeafButton} />
+          <LeafButton color="chestnut" href="/events-news-curiosity" label={labels["homepage-discover-montepiano-title"] ?? ""} />
         </div>
       </AnimatedWrapper>
       {/* <AnimatedTitle
@@ -65,7 +63,7 @@ const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
         MAPPA GOOGLE
       </div> */}
       <AnimatedTitle
-        label={discoverTitle}
+        label={labels["homepage-discover-montepiano-title"] ?? ""}
         color="field-drab"
         direction="right"
       />
@@ -77,11 +75,19 @@ const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
         />
       </AnimatedWrapper>
       <AnimatedTitle
-        label={chaletTitle}
+        label={labels["homepage-chalet-montepiano-title"] ?? ""}
         color="brunswick-green"
         direction="left"
       />
-      {chaletImage?.url && <BannerImage {...mockBannerImage} imageUrl={chaletImage?.url} />}
+      {chaletImage?.url && (
+        <BannerImage
+          color="brunswick-green"
+          linkUrl="/chalet-di-montepiano"
+          imageUrl={chaletImage?.url}
+          direction="left"
+          label={labels["hompage-discover-chalet-hover"] ?? ""}
+        />
+      )}
     </Layout>
   );
 };
@@ -102,12 +108,18 @@ export const query = graphql`
       highlightedArticles {
         ...BlogEntryCardData
       }
-      chaletImage{
+      chaletImage {
         url
       }
     }
     contentfulLayout {
       ...LayoutData
+    }
+    allContentfulLabel {
+      nodes {
+        label
+        contentfulid
+      }
     }
   }
 `;

@@ -22,6 +22,7 @@ const LeftBlock = styled.div`
   align-items: flex-start;
   padding-right: 70px;
   width: 500px;
+  flex-shrink: 0;
 `;
 
 const Title = styled.div`
@@ -32,16 +33,12 @@ const Title = styled.div`
   padding-left: 15px;
 `;
 
-const InfoBox = styled.div``;
-
 const Body = styled(RichText)`
   color: #273e0a; //pakistan-green
   font-size: 17px;
   margin-bottom: 60px;
-  margin-right: 40px;
-  flex-shrink: 0;
 
-  & h6 {
+  & h5 {
     font-size: 30px;
     font-weight: bold;
     color: #828f71;
