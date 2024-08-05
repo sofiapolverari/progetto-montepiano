@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { HeaderMain } from "./header-main/header-main";
-import { DropdownMenu } from "./dropdown-menu/dropdown-menu";
+import { DropdownMenu, DropdownMenuProps } from "./dropdown-menu/dropdown-menu";
 import { MainColorPaletteType } from "../../../constants/colors";
 import { FC } from "react";
 
+//TODO se la apgina è troppo bassa l'header si ingrippa
 export interface HeaderProps extends Queries.LayoutDataFragment {
   color: MainColorPaletteType;
 }
@@ -26,8 +27,14 @@ export const Header: FC<HeaderProps> = ({
   instagramUrl,
   whatsappUrl,
   sections,
+  specialPages,
   ...props
 }) => {
+  const completeSections = [
+    specialPages?.includes("eventi-notizie-curiosita") && {slug: "/events-news-curiosity", title: "Eventi, Notizie e Curiosità"}, 
+    ...(sections ?? []),
+    specialPages?.includes("contatti") && {slug: "/contacts", title: "Contatti"}, 
+  ].filter(Boolean) as DropdownMenuProps["sections"];
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const HandleHamburgerButtonOnClick = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -59,7 +66,7 @@ export const Header: FC<HeaderProps> = ({
             instagramUrl,
           }}
         />
-        <DropdownMenu color={color} isOpen={isOpen} ref={dropDowMenuRef} sections={sections} />
+        <DropdownMenu color={color} isOpen={isOpen} ref={dropDowMenuRef} sections={completeSections} />
       </Root>
     </>
   );

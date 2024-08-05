@@ -7,6 +7,7 @@ import {
   MainColorPaletteType,
 } from "../../../constants/colors";
 import { graphql } from "gatsby";
+import { getFormattedDate } from "../../../utils/get-formatted-date";
 
 export interface LeafCardEventProps extends Queries.BlogEntryCardDataFragment{
   color: MainColorPaletteType;
@@ -36,7 +37,7 @@ const Title = styled.div<{ color: MainColorPaletteType }>`
 `;
 
 export const LeafCardEvent: FC<LeafCardEventProps> = ({
-  date,
+  date: _date,
   title,
   cardImage,
   poster,
@@ -44,6 +45,8 @@ export const LeafCardEvent: FC<LeafCardEventProps> = ({
   color,
   ...props
 }) => {
+const date = _date ? getFormattedDate(_date) : null;
+
   return ((cardImage?.url || poster?.url) &&
     <Root {...props}>
       {date && <Date color={color}>{date}</Date>}
@@ -69,5 +72,6 @@ export const query = graphql`
       url
     }
     slug
+    showIndex
   }
 `

@@ -8,7 +8,7 @@ import {
 } from "../../../../constants/colors";
 import { FC } from "react";
 
-interface DropdownMenuProps extends Pick<Queries.LayoutDataFragment, "sections"> {
+export interface DropdownMenuProps extends Pick<Queries.LayoutDataFragment, "sections"> {
   color: MainColorPaletteType;
   isOpen: boolean;
 }

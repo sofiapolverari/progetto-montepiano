@@ -2,13 +2,6 @@ import * as React from "react";
 import { graphql, type HeadFC, type PageProps } from "gatsby";
 import { ContactSection } from "../components/contacts-section/contact-section";
 import { BannerText } from "../components/banner-text/banner-text";
-import {
-  mockContactSectionConsiglio,
-  mockContactSectionInfo,
-  mockContactSectionMap,
-  mockBannerText,
-} from "../fixture-for-pages/contacts";
-import GlobalStyle from "../globalStyles";
 import { Layout } from "../components/layout/layout";
 
 /* animazione linea= initial: { translateX: direction === "left" ? "-100%" : "100%" },
@@ -17,11 +10,14 @@ import { Layout } from "../components/layout/layout";
               transition: { duration: 0.9, ease: "easeOut" },  */
 
 const ContactsPage: React.FC<PageProps<Queries.ContactsQuery>> = ({
-  data: { allContentfulContact, contentfulLayout },
+  data: { allContentfulContact, contentfulLayout, allContenfulLabel },
 }) => {
+  const labels: Record<string, string> = allContentfulLabel.nodes.reduce(
+    (acc, item) => ({ ...acc, [item.contentfulid]: item.label })
+  );
   return (
     <Layout color="pakistan-green" {...contentfulLayout!}>
-      <BannerText {...mockBannerText} />
+      <BannerText color="pakistan-green" title={labels["contacts-page-title"] ?? ""} />
       {allContentfulContact.nodes.map((contact, i) => (
         <>
           {
@@ -36,7 +32,7 @@ const ContactsPage: React.FC<PageProps<Queries.ContactsQuery>> = ({
               />
             )
           }
-          <ContactSection {...mockContactSectionConsiglio} />
+          <ContactSection {...contact} />
         </>
       ))}
     </Layout>
@@ -45,7 +41,7 @@ const ContactsPage: React.FC<PageProps<Queries.ContactsQuery>> = ({
 
 export default ContactsPage;
 
-export const Head: HeadFC = () => <title>Contacts</title>;
+export const Head: HeadFC = () => <title>Montepiano | Contacts</title>;
 
 export const query = graphql`
   query Contacts {
@@ -56,6 +52,10 @@ export const query = graphql`
     }
     contentfulLayout {
       ...LayoutData
+    }
+    allContentfulLabel {
+      contentfulid
+      label
     }
   }
 `;
