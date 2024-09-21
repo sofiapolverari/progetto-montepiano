@@ -5,7 +5,6 @@ import { DropdownMenu, DropdownMenuProps } from "./dropdown-menu/dropdown-menu";
 import { MainColorPaletteType } from "../../../constants/colors";
 import { FC } from "react";
 
-//TODO se la apgina è troppo bassa l'header si ingrippa
 export interface HeaderProps extends Queries.LayoutDataFragment {
   color: MainColorPaletteType;
 }
@@ -31,13 +30,17 @@ export const Header: FC<HeaderProps> = ({
   ...props
 }) => {
   const completeSections = [
+    {
+      slug: "",
+      title: "Home",
+    },
     specialPages?.includes("eventi-notizie-curiosita") && {
-      slug: "/events-news-curiosity",
+      slug: "events-news-curiosity",
       title: "Eventi, Notizie e Curiosità",
     },
     ...(sections ?? []),
     specialPages?.includes("contatti") && {
-      slug: "/contacts",
+      slug: "contacts",
       title: "Contatti",
     },
   ].filter(Boolean) as DropdownMenuProps["sections"];
@@ -59,6 +62,14 @@ export const Header: FC<HeaderProps> = ({
   useEffect(() => {
     window.addEventListener("click", handleClickOutsideDropdown);
   }, []);
+
+  useEffect(() => {
+    if(isOpen && window?.innerWidth && window.innerWidth <= 640){
+      document.body.style.overflowY = "hidden"
+    } else {
+      document.body.style.overflowY = "scroll"
+    }
+  },[isOpen])
 
   return (
     <>

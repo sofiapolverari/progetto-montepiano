@@ -15,14 +15,23 @@ const Root = styled(Container)`
   flex-direction: row;
   align-items: flex-start;
   padding-top: 30px;
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 `;
 
-const LeftBlock = styled.div`
+const TitleWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding-right: 70px;
   width: 500px;
   flex-shrink: 0;
+  margin-bottom: 15px;
+  @media (max-width: 640px) {
+    flex-direction: column;
+    width: 100%;
+    padding-right: 0px;
+  }
 `;
 
 const Title = styled.div`
@@ -31,21 +40,29 @@ const Title = styled.div`
   color: #273e0a; //pakistan-green
   text-transform: uppercase;
   padding-left: 15px;
+  @media (max-width: 640px) {
+    font-size: 24px;
+    margin: 15px 0px;
+    padding-left: 0px;
+  }
 `;
 
 const Body = styled(RichText)`
   color: #273e0a; //pakistan-green
-  font-size: 17px;
+  font-size: 20px;
   margin-bottom: 60px;
 
   & h5 {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
     color: #828f71;
-    //text-transform: uppercase;
     text-shadow: 0.3px 0.5px 0 #273e0a;
     line-height: 1;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    @media (max-width: 640px) {
+      font-size: 30px;
+    }
   }
 
   & p {
@@ -70,10 +87,10 @@ export const ContactSection: FC<ContactSectionProps> = ({
 
   return (
     <Root>
-      <LeftBlock>
+      <TitleWrapper>
         {contactIcon}
         <Title>{title}</Title>
-      </LeftBlock>
+      </TitleWrapper>
       {body?.raw && <Body raw={body.raw} />}
     </Root>
   );

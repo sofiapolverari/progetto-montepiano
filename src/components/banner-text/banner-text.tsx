@@ -14,12 +14,16 @@ const Title = styled.h1<{ color: MainColorPaletteType }>`
   font-size: 60px;
   text-transform: uppercase;
   text-align: center;
-  margin: 15px 0px 20px 0px;
+  margin: 20px 0px 20px 0px;
   @media (min-width: 1280px) {
     font-size: 80px; //dim responsive del testo
   }
   @media (min-width: 1536px) {
     font-size: 100px;
+  }
+  @media (max-width: 640px) {
+    font-size: 55px;
+    margin: 70px 0px 25px 0px;
   }
 `;
 

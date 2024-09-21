@@ -56,22 +56,25 @@ const Slicers = styled.div<{ color: MainColorPaletteType }>`
 
 const Root = styled.div<{ color: MainColorPaletteType }>`
   height: 50px;
-  margin-left: 20px;
   position: relative;
   transition: all 0.3s ease-out;
   cursor: pointer;
   background-color: ${({ color }) => MainColorPalette[color]};
+  @media (max-width: 640px) {
+    width: 50px;
+  }
+  @media (min-width: 641px) {
+    &:hover {
+      ${LeafHamburger} {
+        width: 100%;
+      }
 
-  &:hover {
-    ${LeafHamburger} {
-      width: 100%;
-    }
-
-    ${Slicers} {
-      opacity: 0;
-    }
-    ${ButtonText} {
-      opacity: 1;
+      ${Slicers} {
+        opacity: 0;
+      }
+      ${ButtonText} {
+        opacity: 1;
+      }
     }
   }
 `;

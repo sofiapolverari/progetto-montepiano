@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styled, { css } from "styled-components";
 import {
   SecondaryColorPalette,
@@ -37,18 +37,15 @@ const Root = styled.a<{ color: MainColorPaletteType }>`
 /**
  * Primary UI component for user interaction
  */
-export const DropdownMenuButton = ({
+export const DropdownMenuButton: FC<DropdownMenuButtonProps> = ({
   color,
   label,
   linkUrl,
   ...props
-}: DropdownMenuButtonProps) => {
-  return (
-    label &&
-    linkUrl && (
-      <Root color={color} href={linkUrl}>
-        {label}
-      </Root>
-    )
-  );
+}) => {
+  return label && linkUrl ? (
+    <Root color={color} href={linkUrl}>
+      {label}
+    </Root>
+  ) : null;
 };

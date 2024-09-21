@@ -29,10 +29,11 @@ const ContactsPage: React.FC<PageProps<Queries.ContactsQuery>> = ({
                   height: "5px",
                   backgroundColor: "#273e0a",
                 }}
+                key={`${i}-hr`}
               />
             )
           }
-          <ContactSection {...contact} />
+          <ContactSection {...contact} key={i}/>
         </>
       ))}
     </Layout>

@@ -6,9 +6,9 @@ import {
   MainColorPalette,
   MainColorPaletteType,
 } from "../../../../constants/colors";
-import { FC } from "react";
 
-export interface DropdownMenuProps extends Pick<Queries.LayoutDataFragment, "sections"> {
+export interface DropdownMenuProps
+  extends Pick<Queries.LayoutDataFragment, "sections"> {
   color: MainColorPaletteType;
   isOpen: boolean;
 }
@@ -20,6 +20,11 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
   flex-direction: column;
   align-items: stretch;
   background-color: ${({ color }) => MainColorPalette[color]};
+  @media (max-width: 640px) {
+    width: 100%;
+    height: calc(100vh - 90px);
+    overflow: scroll;
+  }
 `;
 
 export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
@@ -34,13 +39,17 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
             transition={{ ease: "easeOut", duration: 0.4 }}
           >
             <Root color={color} ref={ref}>
-              {sections?.map((page) => (
-                page && <DropdownMenuButton
-                  linkUrl={page.slug}
-                  label={page.title}
-                  color={color}
-                />
-              ))}
+              {sections?.map(
+                (page, i) =>
+                  page && (
+                    <DropdownMenuButton
+                      linkUrl={`/${page.slug}`}
+                      label={page.title}
+                      color={color}
+                      key={i}
+                    />
+                  )
+              )}
             </Root>
           </motion.div>
         )}

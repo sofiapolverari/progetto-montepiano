@@ -1,8 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { SocialButton } from "../social-button/social-button";
-import { CAROUSEL_HEIGHT } from "../../carousel/constants";
-import { Carousel, CarouselProps } from "../../carousel/carousel";
 import {
   MainColorPalette,
   MainColorPaletteType,
@@ -10,6 +8,7 @@ import {
 import { FC } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { RichText } from "../../rich-text/rich-text";
+import { Container } from "../../container/container";
 
 export interface FooterProps
   extends Pick<
@@ -29,13 +28,20 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
   background-color: ${({ color }) => MainColorPalette[color]};
 `;
 
-const TopWrapper = styled.div`
+const TopWrapper = styled(Container)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+  }
 `;
 
 const LogoWrapper = styled.div`
@@ -43,10 +49,17 @@ const LogoWrapper = styled.div`
   z-index: 10;
   padding-left: 20px;
   padding-bottom: 40px;
+  @media (max-width: 640px) {
+    padding-left: 0px;
+    padding-bottom: 20px;
+  }
 `;
 
-const Logo = styled.img`
+const LogoLabel = styled.img`
   width: 400px;
+  @media (max-width: 640px) {
+    width: 100%;
+  }
 `;
 
 const SocialWrapper = styled.div`
@@ -54,7 +67,13 @@ const SocialWrapper = styled.div`
   gap: 30px;
   padding-bottom: 20px;
   padding-right: 20px;
+  @media (max-width: 640px) {
+    padding-bottom: 0px;
+    padding-right: 0px;
+  }
 `;
+
+const TextWrapper = styled(Container)``;
 
 const TextBox = styled(RichText)`
   color: #e9e5d9; //Alabaster
@@ -66,7 +85,10 @@ const TextBox = styled(RichText)`
     font-size: 20px; //dim responsive del testo
   }
   @media (min-width: 1536px) {
-    font-size: 40px;
+    font-size: 30px;
+  }
+  @media (max-width: 640px) {
+    font-size: 20px;
   }
 `;
 
@@ -77,18 +99,12 @@ export const Footer: FC<FooterProps> = ({
   whatsappUrl,
   ...props
 }) => {
-  //TODO - ALBERTO rich text non funziona controllare
-  const { allContentfulSponsor, contentfulRichTextLabel } =
+  const { contentfulRichTextLabel } =
     useStaticQuery<Queries.Query>(graphql`
       query {
         contentfulRichTextLabel(contentfulid: { eq: "footer-label" }) {
           label {
             raw
-          }
-        }
-        allContentfulSponsor {
-          nodes {
-            ...SponsorData
           }
         }
       }
@@ -98,7 +114,7 @@ export const Footer: FC<FooterProps> = ({
     <Root color={color}>
       <TopWrapper>
         <LogoWrapper>
-          <Logo src="/logo_montepiano_alabaster_logotype.png" />
+          <LogoLabel src="/logo_montepiano_alabaster_logotype.png" />
         </LogoWrapper>
         <SocialWrapper>
           {facebookUrl && (
@@ -112,10 +128,11 @@ export const Footer: FC<FooterProps> = ({
           )}
         </SocialWrapper>
       </TopWrapper>
-      {/* <Carousel items={allContentfulSponsor.nodes} /> */}
-      {contentfulRichTextLabel?.label?.raw && <TextBox raw={contentfulRichTextLabel?.label?.raw}/>}
+      <TextWrapper>
+        {contentfulRichTextLabel?.label?.raw && (
+          <TextBox raw={contentfulRichTextLabel?.label?.raw} />
+        )}
+      </TextWrapper>
     </Root>
   );
 };
-
-// TODO MANDARE A CAPO IL TESTO, CREARE CARTELLINA PER I SOCIAL, ALLINEARE LA TESTA

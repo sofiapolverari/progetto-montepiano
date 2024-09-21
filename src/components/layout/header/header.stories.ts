@@ -23,28 +23,31 @@ const linkUrl = [
 
 export const Default: Story = {
   args: {
-    linkUrl: linkUrl,
+    facebookUrl: linkUrl[0],
+    instagramUrl: linkUrl[1],
+    whatsappUrl: linkUrl[2],
+
     color: "pakistan-green",
   },
 };
 
 export const FieldDrab: Story = {
   args: {
-    linkUrl: linkUrl,
+    ...Default.args,
     color: "field-drab",
   },
 };
 
 export const Chestnut: Story = {
   args: {
-    linkUrl: linkUrl,
+    ...Default.args,
     color: "chestnut",
   },
 };
 
 export const BrunswickGreen: Story = {
   args: {
-    linkUrl: linkUrl,
+    ...Default.args,
     color: "brunswick-green",
   },
 };

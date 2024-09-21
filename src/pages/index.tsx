@@ -2,49 +2,53 @@ import * as React from "react";
 import { graphql, type HeadFC, type PageProps } from "gatsby";
 import { HeroBanner } from "../components/hero-banner/hero-banner";
 import { AnimatedTitle } from "../components/animated-title/animated-title";
-import { AnimatedWrapper } from "../components/animated-wrapper/animated-wrapper";
 import { LeafGrid } from "../components/leaf-grid/leaf-grid";
 import { BannerImage } from "../components/banner-image/banner-image";
 import { LeafButton } from "../components/leaf-button/leaf-button";
 import { Layout } from "../components/layout/layout";
 
-//TODO metti le scatoline dove devono stare
-
 const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
   data: { contentfulHomepage, contentfulLayout, allContentfulLabel },
 }) => {
-  const labels: Record<string, string> = allContentfulLabel.nodes.reduce<Record<string, string>>(
-    (acc, item) => ({ ...acc, [item.contentfulid ?? ""]: item.label ?? "" }), {}
+  const labels: Record<string, string> = allContentfulLabel.nodes.reduce<
+    Record<string, string>
+  >(
+    (acc, item) => ({ ...acc, [item.contentfulid ?? ""]: item.label ?? "" }),
+    {}
   );
   if (!contentfulHomepage) return null;
   const { heroImage, highlightedArticles, indexPages, chaletImage } =
     contentfulHomepage;
   return (
-    <Layout color="pakistan-green" {...contentfulLayout!}>
+    <Layout color="pakistan-green" {...contentfulLayout!} $isPadded={false}>
       <HeroBanner color="pakistan-green" imageSrc={heroImage?.url} />
       <AnimatedTitle
         label={labels["homepage-highligted-events-title"] ?? ""}
         color="chestnut"
         direction="left"
       />
-      <AnimatedWrapper direction="left">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          <LeafGrid
-            items={highlightedArticles as Queries.BlogEntryCardDataFragment[]}
-            color="chestnut"
-            itemSize="small"
-          />
-          <LeafButton color="chestnut" href="/events-news-curiosity" label={labels["homepage-discover-montepiano-title"] ?? ""} />
-        </div>
-      </AnimatedWrapper>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <LeafGrid
+          items={highlightedArticles as Queries.BlogEntryCardDataFragment[]}
+          color="chestnut"
+          itemsize="small"
+          direction="left"
+        />
+        <LeafButton
+          color="chestnut"
+          href="/events-news-curiosity"
+          label={labels["discover-all-events-button"] ?? ""}
+        />
+      </div>
+
       {/* <AnimatedTitle
         label={googleMapsTitle}
         color="pakistan-green"
@@ -67,13 +71,12 @@ const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
         color="field-drab"
         direction="right"
       />
-      <AnimatedWrapper direction="right">
-        <LeafGrid
-          items={indexPages as Queries.BlogSectionCardDataFragment[]}
-          color="field-drab"
-          itemSize="small"
-        />
-      </AnimatedWrapper>
+      <LeafGrid
+        items={indexPages as Queries.BlogSectionCardDataFragment[]}
+        color="field-drab"
+        itemsize="small"
+        direction="right"
+      />
       <AnimatedTitle
         label={labels["homepage-chalet-montepiano-title"] ?? ""}
         color="brunswick-green"

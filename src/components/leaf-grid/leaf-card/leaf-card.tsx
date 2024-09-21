@@ -69,6 +69,7 @@ const Mask = styled.div<{ color: MainColorPaletteType }>`
   mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/urban-sprite.png");
   mask-size: 3000% 100%;
   animation: ${MaskAnimation} 0.7s steps(29) forwards;
+  cursor: pointer;
 `;
 
 const Root = styled.div`
@@ -83,19 +84,21 @@ const Root = styled.div`
   transition: all 1s ease-out;
   filter: drop-shadow(5px 5px 2px gray);
   cursor: pointer;
-  &:hover {
-    border-radius: 100%;
+  @media (min-width: 640px) {
+    &:hover {
+      border-radius: 100%;
 
-    filter: drop-shadow(10px 10px 2px gray);
+      filter: drop-shadow(10px 10px 2px gray);
 
-    transform: translateY(-5px);
+      transform: translateY(-5px);
 
-    ${Mask} {
-      animation: ${MaskAnimationHover} 0.7s steps(29) forwards;
-    }
-    ${Label} {
-      opacity: 1;
-      transition-delay: 0.7s;
+      ${Mask} {
+        animation: ${MaskAnimationHover} 0.7s steps(29) forwards;
+      }
+      ${Label} {
+        opacity: 1;
+        transition-delay: 0.7s;
+      }
     }
   }
 `;
@@ -104,6 +107,7 @@ const Photo = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const LeafCard: FC<LeafCardProps> = ({
@@ -122,5 +126,3 @@ export const LeafCard: FC<LeafCardProps> = ({
     </a>
   );
 };
-
-//TODO sistemare la story per le dimensioni

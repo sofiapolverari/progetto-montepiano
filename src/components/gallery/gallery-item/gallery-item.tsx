@@ -13,7 +13,7 @@ const Root = styled.img`
   height: 100%;
   left: 0;
   top: 0;
-  transition: all ${ANIMATION_TIME}/2 ease-out;
+  transition: all ${ANIMATION_TIME} / 2 ease-out;
   position: relative;
   box-shadow: 0 0 0 #0000;
   opacity: 0.67;
@@ -38,6 +38,7 @@ const Root = styled.img`
     height: 160%;
     left: -40%;
     top: -40%;
+    overflow: visible;
   }
 `;
 

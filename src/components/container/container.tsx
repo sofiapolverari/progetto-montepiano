@@ -12,6 +12,9 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  @media (max-width: 640px) {
+    padding: 0px 30px;
+  }
 `;
 
 export const Container: FC<PropsWithChildren> = ({ children, ...props }) => {

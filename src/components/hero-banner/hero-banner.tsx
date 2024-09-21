@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { FC } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Container } from "../container/container";
 
 export interface HeroBannerProps {
   color: "alabaster" | "pakistan-green";
@@ -14,14 +15,17 @@ const Root = styled.div`
   height: calc(100vh - 90px);
   position: relative;
   overflow: hidden;
+  @media (max-width: 640px) {
+    justify-content: center;
+  }
 `;
 
 const ColorMask = styled.div`
   display: flex;
   width: 100%;
-  height: calc(100vh - 90px);
+  height: 100%;
   background-color: #e9e5d9; //Alabaster
-  opacity: 20%;
+  opacity: 15%;
   z-index: 5;
   position: absolute;
   left: 0px;
@@ -35,22 +39,29 @@ const Photo = styled.img`
   object-fit: cover;
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Container)`
   display: flex;
-  padding-left: 50px;
-  padding-top: 100px;
-  width: 40px;
+  top: 100px;
+
+  @media (max-width: 640px) {
+    left: 0px;
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 const Logo = styled.img`
   width: 700px;
-  filter: drop-shadow(3px 5px 2px #e9e5d9);
+  filter: drop-shadow(3px 3px 2px #e9e5d9);
+  @media (max-width: 640px) {
+    width: 300px;
+  }
 `;
 
 const ScrollDown = styled.div`
   display: flex;
   width: 100%;
-  height: 200px;
+  height: 150px;
   color: #273e0a;
   font-size: 100px;
   justify-content: center;
@@ -63,6 +74,11 @@ const LogoAnimation = styled(motion.div)`
   position: absolute;
   left: 0;
   top: 0;
+  width: 100%;
+  @media (max-width: 640px) {
+    width: 100%;
+    justify-self: center;
+  }
 `;
 
 const ArrowAnimation = styled(motion.div)`
@@ -73,7 +89,11 @@ const ArrowAnimation = styled(motion.div)`
   width: 100%;
 `;
 
-export const HeroBanner: FC<HeroBannerProps> = ({ color, imageSrc, ...props }) => {
+export const HeroBanner: FC<HeroBannerProps> = ({
+  color,
+  imageSrc,
+  ...props
+}) => {
   return (
     <Root>
       <ColorMask />
@@ -101,7 +121,7 @@ export const HeroBanner: FC<HeroBannerProps> = ({ color, imageSrc, ...props }) =
           animate={{ translateY: "0%" }}
           transition={{ ease: "easeOut", duration: 0.9 }}
         >
-          <ScrollDown>⮟</ScrollDown>
+          <ScrollDown/>
         </ArrowAnimation>
       </AnimatePresence>
     </Root>

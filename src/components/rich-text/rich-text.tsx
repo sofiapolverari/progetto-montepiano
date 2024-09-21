@@ -30,7 +30,6 @@ const UnorderedList = styled.ol`
 const Quote= styled.div`
   font-style: italic;
 `
-//TODO gestire il grassetto
 export const RichText: FC<RichTextProps> = ({ raw, ...props }) => {
   return (
     <Body {...props}>

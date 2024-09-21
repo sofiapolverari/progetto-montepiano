@@ -1,30 +1,29 @@
 import * as React from "react";
 import { graphql, type HeadFC, type PageProps } from "gatsby";
-import { BannerText } from "../components/banner-text/banner-text";
 import { Layout } from "../components/layout/layout";
 import styled from "styled-components";
 import { LeafButton } from "../components/leaf-button/leaf-button";
 import { LeafGrid } from "../components/leaf-grid/leaf-grid";
 import { orderBy } from "lodash";
+import { Container } from "../components/container/container";
 
-/* animazione linea= initial: { translateX: direction === "left" ? "-100%" : "100%" },
-              whileInView: { translateX: "0%" },
-              viewport: { once: true },
-              transition: { duration: 0.9, ease: "easeOut" },  */
-
-const SectionIndex = styled.div`
+const SectionIndex = styled(Container)`
   display: flex;
   flex-direction: row;
   gap: 30px;
   margin-right: auto;
   margin-left: auto;
+  justify-content: center;
+  @media (max-width: 640px) {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+  }
 `;
 
 const AllEventsArticlesPage: React.FC<
   PageProps<Queries.AllEventsArticlesQuery>
-> = ({
-  data: { contentfulLayout, contentfulLabel, allContentfulBlogEntrySection },
-}) => {
+> = ({ data: { contentfulLayout, allContentfulBlogEntrySection } }) => {
   const articles = allContentfulBlogEntrySection?.nodes?.reduce<
     Queries.BlogEntryCardDataFragment[]
   >(
@@ -39,13 +38,12 @@ const AllEventsArticlesPage: React.FC<
 
   return (
     <Layout color="chestnut" {...contentfulLayout!}>
-      <BannerText color="chestnut" title={contentfulLabel?.label ?? ""} />
       <SectionIndex>
         <LeafButton color="chestnut" label="Eventi" href="/eventi" />
         <LeafButton color="chestnut" label="News" href="/news" />
         <LeafButton color="chestnut" label="Curiosità" href="/curiosita" />
       </SectionIndex>
-      <LeafGrid itemSize="big" color={"chestnut"} items={sortedArticles} />
+      <LeafGrid itemsize="big" color={"chestnut"} items={sortedArticles} />
     </Layout>
   );
 };

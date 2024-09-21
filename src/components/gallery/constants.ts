@@ -1,1 +1,1 @@
-export const ANIMATION_TIME = "0.3s";
+export const ANIMATION_TIME = "0.5s";

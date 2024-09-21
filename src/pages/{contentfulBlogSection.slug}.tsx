@@ -2,17 +2,11 @@ import * as React from "react";
 import { graphql, HeadProps, type HeadFC, type PageProps } from "gatsby";
 import { BannerText } from "../components/banner-text/banner-text";
 import { LeafGrid } from "../components/leaf-grid/leaf-grid";
-import { Container } from "../components/container/container";
 import { orderBy } from "lodash";
 
 import { Layout } from "../components/layout/layout";
 import styled from "styled-components";
 import { MainColorPaletteType } from "../constants/colors";
-
-const StyledContainer = styled(Container)`
-  margin-top: 60px;
-  margin-bottom: 60px;
-`;
 
 const EventsPage: React.FC<PageProps<Queries.BlogSectionQuery>> = ({
   data: { contentfulBlogSection, contentfulLayout },
@@ -28,10 +22,8 @@ const EventsPage: React.FC<PageProps<Queries.BlogSectionQuery>> = ({
     "pakistan-green";
   return (
     <Layout {...contentfulLayout!} color={color}>
-      <StyledContainer>
         <BannerText title={contentfulBlogSection?.title ?? ""} color={color} />
-        <LeafGrid itemSize="big" color={color} items={sortedArticles} />
-      </StyledContainer>
+        <LeafGrid itemsize="big" color={color} items={sortedArticles} />
     </Layout>
   );
 };

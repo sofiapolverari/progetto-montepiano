@@ -15,8 +15,8 @@ export interface GalleryProps {
 const Root = styled.div`
   margin-left: auto;
   margin-right: auto;
-  max-width: min(80%, 1290px);
-`
+  /* max-width: min(80%, 1290px); */
+`;
 
 const GalleryGrid = styled.div`
   display: grid;
@@ -26,7 +26,10 @@ const GalleryGrid = styled.div`
   transition: all ${ANIMATION_TIME} ease-out;
   border-radius: 10px;
   padding: 0.25em;
-  cursor: zoom-in;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
 
   @media (min-width: 40em) {
     grid-template-rows: repeat(2, 20vh);
@@ -41,14 +44,35 @@ const GalleryGrid = styled.div`
   }
 `;
 
+const GalleryGridMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @media (min-width: 641px) {
+    display: none;
+  }
+`;
+
+const GalleryItemMobile = styled.img`
+  width: 100%;
+  object-fit: contain;
+`;
+
 export const Gallery: FC<GalleryProps> = ({ items: items, ...props }) => {
   return (
+    <Container>
     <Root>
       <GalleryGrid>
-        {items?.map((item) => (
-          <GalleryItem imageUrl={item} />
+        {items?.map((item, i) => (
+          <GalleryItem imageUrl={item} key={i}/>
         ))}
       </GalleryGrid>
+      <GalleryGridMobile>
+        {items?.map((item, i) => (
+          <GalleryItemMobile src={item} key={i}/>
+        ))}
+      </GalleryGridMobile>
     </Root>
+    </Container>
   );
 };

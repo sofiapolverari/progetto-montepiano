@@ -1,37 +1,37 @@
 import React, { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 import { FC } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
-interface AnimatedWrapperProps {
-  direction: "left" | "right";
+export interface AnimatedWrapperProps {
+  direction?: "left" | "right" | "bottom";
 }
 
-const Root = styled.div`
-  width: 100%;
-`;
-
 export const AnimatedWrapper: FC<PropsWithChildren<AnimatedWrapperProps>> = ({
-  direction,
   children,
+  direction = "bottom",
   ...props
 }) => {
   return (
-    <Root {...props}>
-      <AnimatePresence mode={"popLayout"}>
-        {
-          <motion.div
-            {...{
-              initial: { translateX: direction === "left" ? "-100%" : "100%" },
-              whileInView: { translateX: "0%" },
-              viewport: { once: true },
-              transition: { duration: 0.9, ease: "easeOut" },
-            }}
-          >
-            <div>{children}</div>;
-          </motion.div>
-        }
-      </AnimatePresence>
-    </Root>
+    <motion.div
+      {...{
+        initial: {
+          translateX:
+            direction === "bottom"
+              ? "0%"
+              : direction === "left"
+              ? "-100%"
+              : "100%",
+          opacity: 0,
+          translateY: direction === "bottom" ? "60px" : "0px",
+        },
+        whileInView: { translateX: "0%", opacity: 1, translateY: "0px" },
+        viewport: { once: true },
+        transition: { duration: 0.9, ease: "easeOut" },
+      }}
+      {...props}
+    >
+      {children}
+    </motion.div>
   );
 };

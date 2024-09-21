@@ -9,7 +9,7 @@ import {
 import { graphql } from "gatsby";
 import { getFormattedDate } from "../../../utils/get-formatted-date";
 
-export interface LeafCardEventProps extends Queries.BlogEntryCardDataFragment{
+export interface LeafCardEventProps extends Queries.BlogEntryCardDataFragment {
   color: MainColorPaletteType;
 }
 
@@ -23,9 +23,13 @@ const Date = styled.div<{ color: MainColorPaletteType }>`
   color: ${({ color }) => MainColorPalette[color]};
   font-size: 24px;
   padding-bottom: 10px;
+  @media (max-width: 640px) {
+    font-size: 30px;
+    font-weight: 700;
+  }
 `;
 
-const Title = styled.div<{ color: MainColorPaletteType }>`
+const Title = styled.a<{ color: MainColorPaletteType }>`
   line-height: 1;
   display: flex;
   color: ${({ color }) => MainColorPalette[color]};
@@ -34,6 +38,9 @@ const Title = styled.div<{ color: MainColorPaletteType }>`
   text-align: center;
   align-self: center;
   padding-top: 15px;
+  @media (max-width: 640px) {
+    font-size: 40px;
+  }
 `;
 
 export const LeafCardEvent: FC<LeafCardEventProps> = ({
@@ -43,11 +50,12 @@ export const LeafCardEvent: FC<LeafCardEventProps> = ({
   poster,
   slug,
   color,
+  showIndex,
   ...props
 }) => {
-const date = _date ? getFormattedDate(_date) : null;
+  const date = _date ? getFormattedDate(_date) : null;
 
-  return ((cardImage?.url || poster?.url) &&
+  return cardImage?.url || poster?.url ? (
     <Root {...props}>
       {date && <Date color={color}>{date}</Date>}
       <LeafCard
@@ -56,22 +64,22 @@ const date = _date ? getFormattedDate(_date) : null;
         imageUrl={cardImage?.url ?? poster?.url}
         color={color}
       />
-      <Title color={color}> {title} </Title>
+      <Title color={color} href={`/${slug}`}> {title} </Title>
     </Root>
-  );
+  ) : null;
 };
 
 export const query = graphql`
-  fragment BlogEntryCardData on ContentfulBlogEntry{
+  fragment BlogEntryCardData on ContentfulBlogEntry {
     date
     title
     poster {
       url
     }
-    cardImage{
+    cardImage {
       url
     }
     slug
     showIndex
   }
-`
+`;
