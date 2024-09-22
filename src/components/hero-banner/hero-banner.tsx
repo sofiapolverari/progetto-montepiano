@@ -92,7 +92,6 @@ const ArrowAnimation = styled(motion.div)`
 export const HeroBanner: FC<HeroBannerProps> = ({
   color,
   imageSrc,
-  ...props
 }) => {
   return (
     <Root>
