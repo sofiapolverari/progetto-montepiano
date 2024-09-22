@@ -34,6 +34,7 @@ export const LeafCardSection: FC<LeafCardSectionProps> = ({
   cardImage,
   slug,
   color,
+  // Remaining props are caught to let Styled Component assign additional css to the FC root
   ...props
 }) => {
   return cardImage?.url ? (

@@ -51,6 +51,7 @@ export const LeafCardEvent: FC<LeafCardEventProps> = ({
   slug,
   color,
   showIndex,
+  // Remaining props are caught to let Styled Component assign additional css to the FC root
   ...props
 }) => {
   const date = _date ? getFormattedDate(_date) : null;

@@ -27,7 +27,7 @@ const Title = styled.h1<{ color: MainColorPaletteType }>`
   }
 `;
 
-export const BannerText: FC<BannerTextProps> = ({ title, color, ...props }) => {
+export const BannerText: FC<BannerTextProps> = ({ title, color }) => {
   return (
     <Container>
       <Title color={color}> {title} </Title>

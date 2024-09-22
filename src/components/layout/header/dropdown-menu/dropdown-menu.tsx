@@ -28,7 +28,7 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
 `;
 
 export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
-  ({ color, isOpen, sections, ...props }, ref) => {
+  ({ color, isOpen, sections }, ref) => {
     return (
       <AnimatePresence mode={"popLayout"}>
         {isOpen && (

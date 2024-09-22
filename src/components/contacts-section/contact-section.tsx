@@ -74,7 +74,6 @@ export const ContactSection: FC<ContactSectionProps> = ({
   title,
   body,
   icon,
-  ...props
 }) => {
   let contactIcon = <></>;
   if (icon === "consiglio") {

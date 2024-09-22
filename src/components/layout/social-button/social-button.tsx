@@ -16,8 +16,7 @@ const Root = styled.a`
 
 export const SocialButton: FC<SocialButtonProps> = ({
   linkUrl,
-  icon,
-  ...props
+  icon
 }) => {
   let socialIcon = <></>;
   if (icon === "facebook") {

@@ -142,6 +142,7 @@ export const BlogEntry: FC<BlogEntryProps> = ({
   color,
   direction,
   images,
+  // Remaining props are caught to let Styled Component assign additional css to the FC root
   ...props
 }) => {
   const formattedDate = date ? getFormattedDate(date) : null;

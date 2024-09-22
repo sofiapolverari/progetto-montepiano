@@ -52,7 +52,6 @@ export const AnimatedTitle: FC<AnimatedTitleProps> = ({
   label,
   color,
   direction,
-  ...props
 }) => {
   return (
     <Root>

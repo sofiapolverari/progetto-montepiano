@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from "react";
-import styled, { css } from "styled-components";
 import { FC } from "react";
 import { motion } from "framer-motion";
 
@@ -10,6 +9,7 @@ export interface AnimatedWrapperProps {
 export const AnimatedWrapper: FC<PropsWithChildren<AnimatedWrapperProps>> = ({
   children,
   direction = "bottom",
+  // Remaining props are caught to let Styled Component assign additional css to the FC root
   ...props
 }) => {
   return (

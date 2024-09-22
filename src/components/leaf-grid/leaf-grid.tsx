@@ -60,6 +60,7 @@ export const LeafGrid: FC<LeafGridProps> = ({
   itemsize: itemSize,
   color,
   direction,
+  // Remaining props are caught to let Styled Component assign additional css to the FC root
   ...props
 }) => {
   return (

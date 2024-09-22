@@ -42,6 +42,6 @@ const Root = styled.img`
   }
 `;
 
-export const GalleryItem: FC<GalleryItemProps> = ({ imageUrl, ...props }) => {
+export const GalleryItem: FC<GalleryItemProps> = ({ imageUrl }) => {
   return <Root src={imageUrl} />;
 };

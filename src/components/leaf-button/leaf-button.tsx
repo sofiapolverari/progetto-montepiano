@@ -8,21 +8,8 @@ import {
 import { FC } from "react";
 
 export interface LeafButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
   color: MainColorPaletteType;
-  /**
-   * How large should the button be?
-   */
-  // size?: "small" | "medium" | "large"; TODO
-  /**
-   * Button contents
-   */
   label?: string;
-  /**
-   * Optional click handler
-   */
   onClick?: () => void;
   href?: string;
 }
@@ -63,8 +50,7 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
 export const LeafButton: FC<LeafButtonProps> = ({
   color,
   label,
-  href,
-  ...props
+  href
 }) => {
   const button = <Root color={color}>{label}</Root>;
   return href ? <a href={href}>{button}</a> : button;

@@ -11,8 +11,6 @@ interface HamburgerButtonProps {
   onClick?: () => void;
 }
 
-// TODO Inserire un Root trasparente piu grande per l-hoover
-
 const LeafHamburger = styled.div`
   display: flex;
   position: absolute;
@@ -80,7 +78,7 @@ const Root = styled.div<{ color: MainColorPaletteType }>`
 `;
 
 export const HamburgerButton = forwardRef<HTMLDivElement, HamburgerButtonProps>(
-  ({ color, onClick, ...props }, ref) => {
+  ({ color, onClick }, ref) => {
     return (
       <Root color={color} onClick={onClick} ref={ref}>
         <ButtonText color={color}>Esplora</ButtonText>

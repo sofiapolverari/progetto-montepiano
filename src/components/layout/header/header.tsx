@@ -27,7 +27,6 @@ export const Header: FC<HeaderProps> = ({
   whatsappUrl,
   sections,
   specialPages,
-  ...props
 }) => {
   const completeSections = [
     {

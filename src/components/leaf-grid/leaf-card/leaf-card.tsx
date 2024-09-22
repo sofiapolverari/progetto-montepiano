@@ -114,8 +114,7 @@ export const LeafCard: FC<LeafCardProps> = ({
   label,
   linkUrl,
   imageUrl,
-  color,
-  ...props
+  color
 }) => {
   return (
     <a href={linkUrl}>

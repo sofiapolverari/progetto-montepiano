@@ -51,7 +51,6 @@ export const HeaderMain: FC<HeaderMainProps> = ({
   facebookUrl,
   instagramUrl,
   whatsappUrl,
-  ...props
 }) => {
   return (
     <Root color={color}>

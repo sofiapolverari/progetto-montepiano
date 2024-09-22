@@ -146,7 +146,6 @@ export const BannerImage: FC<BannerImageProps> = ({
   direction,
   imageUrl,
   linkUrl,
-  ...props
 }) => {
   return (
     <Root href={linkUrl}>

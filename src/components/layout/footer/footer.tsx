@@ -97,7 +97,6 @@ export const Footer: FC<FooterProps> = ({
   facebookUrl,
   instagramUrl,
   whatsappUrl,
-  ...props
 }) => {
   const { contentfulRichTextLabel } =
     useStaticQuery<Queries.Query>(graphql`

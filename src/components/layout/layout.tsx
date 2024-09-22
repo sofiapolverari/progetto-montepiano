@@ -33,6 +33,7 @@ const ChildWrapper = styled.div<Pick<LayoutProps, "$isPadded">>`
 export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
   children,
   $isPadded: padded = true,
+  // Remaining props are caught to let Styled Component assign additional css to the FC root
   ...props
 }) => (
   <>

@@ -41,7 +41,6 @@ export const DropdownMenuButton: FC<DropdownMenuButtonProps> = ({
   color,
   label,
   linkUrl,
-  ...props
 }) => {
   return label && linkUrl ? (
     <Root color={color} href={linkUrl}>

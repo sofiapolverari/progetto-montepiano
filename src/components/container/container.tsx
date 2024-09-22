@@ -17,7 +17,11 @@ const Wrapper = styled.div`
   }
 `;
 
-export const Container: FC<PropsWithChildren> = ({ children, ...props }) => {
+export const Container: FC<PropsWithChildren> = ({
+  children,
+  // Remaining props are caught to let Styled Component assign additional css to the FC root
+  ...props
+}) => {
   return (
     <Root>
       <Wrapper {...props}>{children}</Wrapper>

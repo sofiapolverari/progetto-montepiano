@@ -23,7 +23,7 @@ const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
     <Layout color="pakistan-green" {...contentfulLayout!} $isPadded={false}>
       <HeroBanner color="pakistan-green" imageSrc={heroImage?.url} />
       <AnimatedTitle
-        label={labels["homepage-highligted-events-title"] ?? ""}
+        label={labels["homepage-highlighted-events-title"] ?? ""}
         color="chestnut"
         direction="left"
       />
@@ -88,7 +88,7 @@ const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
           linkUrl="/chalet-di-montepiano"
           imageUrl={chaletImage?.url}
           direction="left"
-          label={labels["hompage-discover-chalet-hover"] ?? ""}
+          label={labels["homepage-discover-chalet-hover"] ?? ""}
         />
       )}
     </Layout>

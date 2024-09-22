@@ -58,7 +58,7 @@ const GalleryItemMobile = styled.img`
   object-fit: contain;
 `;
 
-export const Gallery: FC<GalleryProps> = ({ items: items, ...props }) => {
+export const Gallery: FC<GalleryProps> = ({ items: items }) => {
   return (
     <Container>
     <Root>
