@@ -82,6 +82,9 @@ const DateLabel = styled.h2<{ color: MainColorPaletteType }>`
 const TextBox = styled(RichText)<{ color: MainColorPaletteType }>`
   //background-color: ${({ color }) => MainColorPalette[color]};
   width: 100%;
+  max-width: 100%;
+  text-wrap: wrap;
+  word-break: break-word;
   //color: #e9e5d9; //Alabaster
   color: ${({ color }) => MainColorPalette[color]};
   //padding: 15px;
@@ -149,7 +152,7 @@ export const BlogEntry: FC<BlogEntryProps> = ({
   return (
     <div
       {...props}
-      style={{ display: "flex", flexDirection: "column", gap: "70px" }}
+      style={{ display: "flex", flexDirection: "column", gap: "70px", maxWidth: "100%" }}
     >
       <Root>
         <ColumnWrapper>
