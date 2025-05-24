@@ -113,7 +113,7 @@ export const Footer: FC<FooterProps> = ({
     <Root color={color}>
       <TopWrapper>
         <LogoWrapper>
-          <LogoLabel src="/logo_montepiano_alabaster_logotype.png" />
+          <LogoLabel src="/logo_montepiano_alabaster_horizontal.png" />
         </LogoWrapper>
         <SocialWrapper>
           {facebookUrl && (

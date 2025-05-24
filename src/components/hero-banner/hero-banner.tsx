@@ -41,20 +41,18 @@ const Photo = styled.img`
 
 const LogoWrapper = styled(Container)`
   display: flex;
-  top: 100px;
+  top: 60px;
 
-  @media (max-width: 640px) {
     left: 0px;
     width: 100%;
     justify-content: center;
-  }
 `;
 
 const Logo = styled.img`
   width: 700px;
   filter: drop-shadow(3px 3px 2px #e9e5d9);
   @media (max-width: 640px) {
-    width: 300px;
+    width: 100%;
   }
 `;
 
@@ -90,7 +88,6 @@ const ArrowAnimation = styled(motion.div)`
 `;
 
 export const HeroBanner: FC<HeroBannerProps> = ({
-  color,
   imageSrc,
 }) => {
   return (
@@ -105,11 +102,7 @@ export const HeroBanner: FC<HeroBannerProps> = ({
         >
           <LogoWrapper>
             <Logo
-              src={
-                color === "alabaster"
-                  ? "/logo_montepiano_alabaster_logotype.png"
-                  : "/logo_montepiano_pkgreen.png"
-              }
+              src="/logo_montepiano_pkgreen.png"
             />
           </LogoWrapper>
         </LogoAnimation>
