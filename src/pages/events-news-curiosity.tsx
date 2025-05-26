@@ -40,7 +40,7 @@ const AllEventsArticlesPage: React.FC<
     <Layout color="chestnut" {...contentfulLayout!}>
       <SectionIndex>
         <LeafButton color="chestnut" label="Eventi" href="/eventi" />
-        <LeafButton color="chestnut" label="News" href="/news" />
+        <LeafButton color="chestnut" label="News" href="/notizie" />
         <LeafButton color="chestnut" label="Curiosità" href="/curiosita" />
       </SectionIndex>
       <LeafGrid itemsize="big" color={"chestnut"} items={sortedArticles} />
