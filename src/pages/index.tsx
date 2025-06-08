@@ -21,7 +21,7 @@ const IndexPage: React.FC<PageProps<Queries.HomeQuery>> = ({
     contentfulHomepage;
   return (
     <Layout color="pakistan-green" {...contentfulLayout!} $isPadded={false}>
-      <HeroBanner color="pakistan-green" imageSrc={heroImage?.url} />
+      <HeroBanner color="pakistan-green" image={heroImage?.gatsbyImageData} />
       <AnimatedTitle
         label={labels["homepage-highlighted-events-title"] ?? ""}
         color="chestnut"
@@ -103,7 +103,7 @@ export const query = graphql`
   query Home {
     contentfulHomepage {
       heroImage {
-        url
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
       }
       indexPages {
         ...BlogSectionCardData

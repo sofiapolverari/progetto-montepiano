@@ -3,10 +3,11 @@ import styled, { css } from "styled-components";
 import { FC } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "../container/container";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 
 export interface HeroBannerProps {
   color: "alabaster" | "pakistan-green";
-  imageSrc?: string | null;
+  image?: IGatsbyImageData | null;
 }
 
 const Root = styled.div`
@@ -32,7 +33,7 @@ const ColorMask = styled.div`
   top: 0px;
 `;
 
-const Photo = styled.img`
+const Photo = styled(GatsbyImage)`
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -43,9 +44,9 @@ const LogoWrapper = styled(Container)`
   display: flex;
   top: 60px;
 
-    left: 0px;
-    width: 100%;
-    justify-content: center;
+  left: 0px;
+  width: 100%;
+  justify-content: center;
 `;
 
 const Logo = styled.img`
@@ -87,13 +88,13 @@ const ArrowAnimation = styled(motion.div)`
   width: 100%;
 `;
 
-export const HeroBanner: FC<HeroBannerProps> = ({
-  imageSrc,
-}) => {
+export const HeroBanner: FC<HeroBannerProps> = ({ image }) => {
   return (
     <Root>
       <ColorMask />
-      {imageSrc && <Photo src={imageSrc} />}
+      {image && (
+        <Photo image={image} alt="heroimage" />
+      )}
       <AnimatePresence mode={"popLayout"}>
         <LogoAnimation
           initial={{ translateY: "-100%" }}
@@ -101,9 +102,7 @@ export const HeroBanner: FC<HeroBannerProps> = ({
           transition={{ ease: "easeOut", duration: 0.9 }}
         >
           <LogoWrapper>
-            <Logo
-              src="/logo_montepiano_pkgreen.png"
-            />
+            <Logo src="/logo_montepiano_pkgreen.png" />
           </LogoWrapper>
         </LogoAnimation>
       </AnimatePresence>
@@ -113,7 +112,7 @@ export const HeroBanner: FC<HeroBannerProps> = ({
           animate={{ translateY: "0%" }}
           transition={{ ease: "easeOut", duration: 0.9 }}
         >
-          <ScrollDown/>
+          <ScrollDown />
         </ArrowAnimation>
       </AnimatePresence>
     </Root>
