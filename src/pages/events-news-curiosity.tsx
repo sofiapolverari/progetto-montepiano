@@ -34,7 +34,16 @@ const AllEventsArticlesPage: React.FC<
     []
   );
 
-  const sortedArticles = orderBy(articles, "showIndex", "desc");
+  const now = new Date();
+  const sortedArticles = orderBy(
+     articles,
+      [
+        (article) => !article?.date || new Date(article.date) >= now, // true for future or today
+        (article) => article?.showIndex ?? 0,
+        (article) => article?.date && Math.abs(new Date(article.date).getTime() - now.getTime()), // closeness to today
+      ],
+      ['desc', 'desc', 'asc'] // future first, higher showIndex first, closer date first
+    );
 
   return (
     <Layout color="chestnut" {...contentfulLayout!}>

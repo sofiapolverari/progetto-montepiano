@@ -11,19 +11,27 @@ import { MainColorPaletteType } from "../constants/colors";
 const EventsPage: React.FC<PageProps<Queries.BlogSectionQuery>> = ({
   data: { contentfulBlogSection, contentfulLayout },
 }) => {
+  const now = new Date();
+
   const sortedArticles = orderBy(
     contentfulBlogSection?.blogSection
-      ?.blogentry as Queries.BlogEntryCardDataFragment[],
-    "showIndex",
-    "desc"
+      ?.blogentry,
+    [
+      (article) => !article?.date || new Date(article.date) >= now, // true for future or today
+      (article) => article?.showIndex ?? 0,
+      (article) => article?.date && Math.abs(new Date(article.date).getTime() - now.getTime()), // closeness to today
+    ],
+    ['desc', 'desc', 'asc'] // future first, higher showIndex first, closer date first
   );
+
+  console.log(sortedArticles)
   const color: MainColorPaletteType =
     (contentfulBlogSection?.blogSection?.color as MainColorPaletteType) ??
     "pakistan-green";
   return (
     <Layout {...contentfulLayout!} color={color}>
         <BannerText title={contentfulBlogSection?.title ?? ""} color={color} />
-        <LeafGrid itemsize="big" color={color} items={sortedArticles} />
+        <LeafGrid itemsize="big" color={color} items={sortedArticles as Queries.BlogSectionCardDataFragment[]} />
     </Layout>
   );
 };

@@ -7,12 +7,15 @@ import {
 
 interface DropdownMenuButtonProps {
   label: string | null;
+  bottomLabel?: string | null;
   linkUrl: string | null;
   color: MainColorPaletteType;
 }
 
 const Root = styled.a<{ color: MainColorPaletteType }>`
   display: flex;
+  flex-direction: column;
+  gap: 6px;
   height: 70px;
   justify-content: center;
   align-items: center;
@@ -41,10 +44,12 @@ export const DropdownMenuButton: FC<DropdownMenuButtonProps> = ({
   color,
   label,
   linkUrl,
+  bottomLabel
 }) => {
   return label && linkUrl ? (
     <Root color={color} href={linkUrl}>
       {label}
+      {bottomLabel && <span style={{fontSize:"12px"}}>{bottomLabel}</span>}
     </Root>
   ) : null;
 };
