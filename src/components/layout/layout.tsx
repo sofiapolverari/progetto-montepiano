@@ -54,7 +54,6 @@ export const query = graphql`
     sections {
       slug
       title
-      menuNote
     }
     specialPages
   }

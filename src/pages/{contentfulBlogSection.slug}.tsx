@@ -6,7 +6,17 @@ import { orderBy } from "lodash";
 
 import { Layout } from "../components/layout/layout";
 import styled from "styled-components";
-import { MainColorPaletteType } from "../constants/colors";
+import { MainColorPalette, MainColorPaletteType } from "../constants/colors";
+
+const Subtitle = styled.h2<{ color: MainColorPaletteType }>`
+  color: ${({ color }) => MainColorPalette[color]};
+  font-size: 32px;
+  text-align: center;
+  margin: 20px 0px 20px 0px;
+  @media (max-width: 640px) {
+    margin: 70px 0px 25px 0px;
+  }
+`;
 
 const EventsPage: React.FC<PageProps<Queries.BlogSectionQuery>> = ({
   data: { contentfulBlogSection, contentfulLayout },
@@ -24,13 +34,13 @@ const EventsPage: React.FC<PageProps<Queries.BlogSectionQuery>> = ({
     ['desc', 'desc', 'asc'] // future first, higher showIndex first, closer date first
   );
 
-  console.log(sortedArticles)
   const color: MainColorPaletteType =
     (contentfulBlogSection?.blogSection?.color as MainColorPaletteType) ??
     "pakistan-green";
   return (
     <Layout {...contentfulLayout!} color={color}>
         <BannerText title={contentfulBlogSection?.title ?? ""} color={color} />
+        <Subtitle color={color}>{contentfulBlogSection?.subtitle}</Subtitle>
         <LeafGrid itemsize="big" color={color} items={sortedArticles as Queries.BlogSectionCardDataFragment[]} />
     </Layout>
   );
@@ -46,6 +56,7 @@ export const query = graphql`
   query BlogSection($id: String) {
     contentfulBlogSection(id: { eq: $id }) {
       title
+      subtitle
       blogSection {
         color
         blogentry {

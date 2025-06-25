@@ -45,7 +45,6 @@ export const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
                     <DropdownMenuButton
                       linkUrl={`/${page.slug}`}
                       label={page.title}
-                      bottomLabel={page.menuNote}
                       color={color}
                       key={i}
                     />
